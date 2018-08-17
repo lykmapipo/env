@@ -17,7 +17,14 @@ process.env.CONTENT_TYPES = 'FAQ,Tariff';
 
 /* declarations */
 const env = require(path.join(__dirname, '..'));
-const { getNumber, getArray, getString, getStrings, getNumbers } = env;
+const {
+  getNumber,
+  getArray,
+  getString,
+  getStrings,
+  getNumbers,
+  getBoolean
+} = env;
 
 describe('parsed', function () {
 
@@ -61,6 +68,13 @@ describe('parsed', function () {
     expect(value).to.be.equal(55.11);
   });
 
+  it('should be able to get boolean value', function () {
+    const value = getBoolean('DEBUG', false);
+    expect(value).to.exist;
+    expect(value).to.be.a('boolean');
+    expect(value).to.be.true;
+  });
+
   it('should be able to get array value', function () {
     const value = getArray('LOCALES');
     expect(value).to.exist;
@@ -96,12 +110,12 @@ describe('parsed', function () {
   });
 
   it('should be able to .env value', function () {
-    let port = env('PORT');
-    expect(port).to.exist;
-    expect(port).to.be.equal('5000');
-    port = getNumber('PORT');
-    expect(port).to.exist;
-    expect(port).to.be.equal(5000);
+    let value = env('PORT');
+    expect(value).to.exist;
+    expect(value).to.be.equal('5000');
+    value = getNumber('PORT');
+    expect(value).to.exist;
+    expect(value).to.be.equal(5000);
   });
 
 });

@@ -26,14 +26,18 @@ const { getString, getNumber, getStrings, getNumbers } = env;
 
 ...
 
-const locale = env('LOCALE', 'en');
-const locale = getString('LOCALE', 'en');
-const locales = getStrings('LOCALES', ['en']);
+const LOCALE = env('LOCALE', 'en');
+const LOCALE = getString('LOCALE', 'en');
+const LOCALES = getStrings('LOCALES', ['en']);
 
 ...
 
-const port = getNumber('PORT', 9000);
-const ports = getNumbers('PORTS', [3000, 9000, 8080]);
+const PORT = getNumber('PORT', 9000);
+const PORTS = getNumbers('PORTS', [3000, 9000, 8080]);
+
+...
+
+const DEBUG = getBoolean('DEBUG', false);
 
 ...
 

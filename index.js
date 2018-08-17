@@ -19,7 +19,6 @@ process.env.BASE_PATH =
  * load configuration from .env file from BASE_PATH
  * @see  {@link https://github.com/motdotla/dotenv}
  */
-console.log(path.resolve(process.env.BASE_PATH, '.env'));
 dotenv.load({ path: path.resolve(process.env.BASE_PATH, '.env') });
 
 
@@ -63,6 +62,12 @@ env.getStrings = function getStrings(key, defaultValue) {
   let strings = env.getArray(key, defaultValue);
   strings = _.map(strings, function (number) { return String(number); });
   return strings;
+};
+
+env.getBoolean = function getBoolean(key, defaultValue) {
+  let value = env(key, defaultValue);
+  value = value ? Boolean(value) : value;
+  return value;
 };
 
 
