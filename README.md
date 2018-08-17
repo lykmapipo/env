@@ -5,6 +5,8 @@
 
 Helper utilities for accessing environment variables
 
+*Note: To use [dotenv](https://github.com/motdotla/dotenv) make sure you put `.env` file in your root directory of your project or set `BASE_PATH` environment variable before require env*
+
 ## Requirements
 
 - [NodeJS v8.11.1+](https://nodejs.org)

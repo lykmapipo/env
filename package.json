@@ -11,7 +11,9 @@
     "url": "https://github.com/lykmapipo/env.git"
   },
   "keywords": [
+    "lykmapipo",
     "env",
+    "dotenv",
     "config",
     "key",
     "value"
@@ -39,6 +41,7 @@
     "mocha": "^5.2.0"
   },
   "dependencies": {
+    "dotenv": "^6.0.0",
     "lodash": "^4.17.10"
   },
   "engines": {

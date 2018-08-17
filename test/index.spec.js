@@ -6,6 +6,7 @@ const path = require('path');
 const { expect } = require('chai');
 
 
+process.env.BASE_PATH = path.resolve(__dirname);
 process.env.LOCALES = 'en,sw,fr';
 process.env.DEFAULT_COUNTRY_CODE = 'TZ';
 process.env.DEFAULT_CITY = 'Dar es salaam';
@@ -19,7 +20,6 @@ const env = require(path.join(__dirname, '..'));
 const { getNumber, getArray, getString, getStrings, getNumbers } = env;
 
 describe('parsed', function () {
-
 
   it('should be able to get raw value', function () {
     const value = env('LOCALES');
@@ -87,6 +87,21 @@ describe('parsed', function () {
     expect(value).to.exist;
     expect(value).to.be.an('array');
     expect(value).to.be.eql([14, 15, 16]);
+  });
+
+  it('should be able to get base path', function () {
+    const value = env('BASE_PATH');
+    expect(value).to.exist;
+    expect(value).to.be.equal(process.env.BASE_PATH);
+  });
+
+  it('should be able to .env value', function () {
+    let port = env('PORT');
+    expect(port).to.exist;
+    expect(port).to.be.equal('5000');
+    port = getNumber('PORT');
+    expect(port).to.exist;
+    expect(port).to.be.equal(5000);
   });
 
 });

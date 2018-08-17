@@ -2,7 +2,25 @@
 
 
 /* dependencies */
+const path = require('path');
 const _ = require('lodash');
+const dotenv = require('dotenv');
+
+
+/**
+ * ensure process BASE_PATH
+ * @default process.cwd()
+ */
+process.env.BASE_PATH =
+  path.resolve(process.env.BASE_PATH || process.cwd());
+
+
+/**
+ * load configuration from .env file from BASE_PATH
+ * @see  {@link https://github.com/motdotla/dotenv}
+ */
+console.log(path.resolve(process.env.BASE_PATH, '.env'));
+dotenv.load({ path: path.resolve(process.env.BASE_PATH, '.env') });
 
 
 /* definition */
