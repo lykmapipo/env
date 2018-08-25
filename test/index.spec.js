@@ -26,7 +26,7 @@ const {
   getBoolean
 } = env;
 
-describe('parsed', function () {
+describe('env', function () {
 
   it('should be able to get raw value', function () {
     const value = env('LOCALES');
@@ -116,6 +116,35 @@ describe('parsed', function () {
     value = getNumber('PORT');
     expect(value).to.exist;
     expect(value).to.be.equal(5000);
+  });
+
+  describe('shortcuts', function () {
+
+    it('should be have available', function () {
+
+      expect(env.is).to.exist;
+      expect(env.is).to.be.a('function');
+
+      expect(env.isTest).to.exist;
+      expect(env.isTest).to.be.a('boolean');
+
+      expect(env.isDev).to.exist;
+      expect(env.isDev).to.be.a('boolean');
+
+      expect(env.isProd).to.exist;
+      expect(env.isProd).to.be.a('boolean');
+
+      expect(env.isLocal).to.exist;
+      expect(env.isLocal).to.be.a('boolean');
+
+    });
+
+    it('should be able to tell current runtime env', function () {
+      expect(env.isTest).to.exist;
+      expect(env.isTest).to.be.a('boolean');
+      expect(env.isTest).to.be.true;
+    });
+
   });
 
 });

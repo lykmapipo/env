@@ -8,6 +8,13 @@ const dotenv = require('dotenv');
 
 
 /**
+ * ensure process NODE_ENV
+ * @default development
+ */
+process.env.NODE_ENV = (process.env.NODE_ENV || 'development');
+
+
+/**
  * ensure process BASE_PATH
  * @default process.cwd()
  */
@@ -69,6 +76,16 @@ env.getBoolean = function getBoolean(key, defaultValue) {
   value = value ? Boolean(value) : value;
   return value;
 };
+
+
+/* execution environment shortcuts */
+env.is = function (_env) {
+  return env('NODE_ENV') === _env;
+};
+env.isTest = env.is('test');
+env.isDevelopment = env.isDev = env.is('development');
+env.isProduction = env.isProd = env.is('production');
+env.isLocal = (env.isTest || env.isDev);
 
 
 /* exports env */

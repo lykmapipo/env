@@ -1,6 +1,6 @@
 {
   "name": "@lykmapipo/env",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Helper utilities for accessing environment variables",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,9 @@
     "dotenv",
     "config",
     "key",
-    "value"
+    "value",
+    "environment",
+    "execution"
   ],
   "contributors": [
     {
