@@ -109,13 +109,22 @@ describe('env', function () {
     expect(value).to.be.equal(process.env.BASE_PATH);
   });
 
-  it('should be able to .env value', function () {
+  it('should be able to get .env value', function () {
     let value = env('PORT');
     expect(value).to.exist;
     expect(value).to.be.equal('5000');
     value = getNumber('PORT');
     expect(value).to.exist;
     expect(value).to.be.equal(5000);
+  });
+
+  it('should be able to get .env value', function () {
+    let value = env('LOG');
+    expect(value).to.exist;
+    expect(value).to.be.equal('false');
+    value = getBoolean('LOG');
+    expect(value).to.exist;
+    expect(value).to.be.false;
   });
 
   describe('shortcuts', function () {

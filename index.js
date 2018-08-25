@@ -73,6 +73,8 @@ env.getStrings = function getStrings(key, defaultValue) {
 
 env.getBoolean = function getBoolean(key, defaultValue) {
   let value = env(key, defaultValue);
+  if (value === 'false') { value = false; }
+  if (value === 'true') { value = true; }
   value = value ? Boolean(value) : value;
   return value;
 };
