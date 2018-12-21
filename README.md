@@ -15,7 +15,7 @@ Helper utilities for accessing environment variables
 ## Installation
 
 ```sh
-npm install --save lodash @lykmapipo/env
+npm install --save @lykmapipo/env
 ```
 
 ## Usage
