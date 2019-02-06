@@ -84,10 +84,10 @@ env.getBoolean = function getBoolean(key, defaultValue) {
 env.is = function (_env) {
   return env('NODE_ENV') === _env;
 };
-env.isTest = env.is('test');
-env.isDevelopment = env.isDev = env.is('development');
-env.isProduction = env.isProd = env.is('production');
-env.isLocal = (env.isTest || env.isDev);
+env.isTest = () => env.is('test');
+env.isDevelopment = env.isDev = () => env.is('development');
+env.isProduction = env.isProd = () => env.is('production');
+env.isLocal = () => (env.isTest() || env.isDev());
 
 
 /* exports env */

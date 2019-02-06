@@ -135,23 +135,25 @@ describe('env', function () {
       expect(env.is).to.be.a('function');
 
       expect(env.isTest).to.exist;
-      expect(env.isTest).to.be.a('boolean');
+      expect(env.isTest).to.be.a('function');
 
       expect(env.isDev).to.exist;
-      expect(env.isDev).to.be.a('boolean');
+      expect(env.isDev).to.be.a('function');
 
       expect(env.isProd).to.exist;
-      expect(env.isProd).to.be.a('boolean');
+      expect(env.isProd).to.be.a('function');
 
       expect(env.isLocal).to.exist;
-      expect(env.isLocal).to.be.a('boolean');
+      expect(env.isLocal).to.be.a('function');
 
     });
 
     it('should be able to tell current runtime env', function () {
       expect(env.isTest).to.exist;
-      expect(env.isTest).to.be.a('boolean');
-      expect(env.isTest).to.be.true;
+      expect(env.isTest()).to.be.true;
+      expect(env.isLocal()).to.be.true;
+      expect(env.isProd()).to.be.false;
+      expect(env.isDev()).to.be.false;
     });
 
   });
