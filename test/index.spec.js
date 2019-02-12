@@ -23,7 +23,8 @@ const {
   getString,
   getStrings,
   getNumbers,
-  getBoolean
+  getBoolean,
+  apiVersion
 } = env;
 
 describe('env', function () {
@@ -116,6 +117,16 @@ describe('env', function () {
     value = getNumber('PORT');
     expect(value).to.exist;
     expect(value).to.be.equal(5000);
+  });
+
+  it('should be compute api version', function () {
+    const version = apiVersion();
+    expect(version).to.exist;
+    expect(version).to.be.equal('v1');
+
+    expect(apiVersion({ minor: true })).to.be.equal('v1.0');
+    expect(apiVersion({ patch: true })).to.be.equal('v1.0.0');
+    expect(apiVersion({ version: 2 })).to.be.equal('v2');
   });
 
   it('should be able to get .env value', function () {

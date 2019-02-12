@@ -4,6 +4,7 @@
 /* dependencies */
 const path = require('path');
 const _ = require('lodash');
+const semver = require('semver');
 const dotenv = require('dotenv');
 
 
@@ -88,6 +89,41 @@ env.isTest = () => env.is('test');
 env.isDevelopment = env.isDev = () => env.is('development');
 env.isProduction = env.isProd = () => env.is('production');
 env.isLocal = () => (env.isTest() || env.isDev());
+
+env.apiVersion = optns => {
+  // ensure options
+  const options = _.merge({}, {
+    version: '1.0.0',
+    prefix: 'v',
+    major: true,
+    minor: false,
+    patch: false
+  }, optns);
+  const { version, prefix, minor, patch } = options;
+
+  // parse api version
+  const parsedVersion = semver.coerce(env.getString('API_VERSION', version));
+
+  //prepare exposed api version
+  let apiVersion = parsedVersion.major;
+
+  //allow minor
+  if (minor) {
+    apiVersion =
+      ([parsedVersion.major, parsedVersion.minor].join('.'));
+  }
+
+  //allow patch
+  if (patch) {
+    apiVersion = ([
+      parsedVersion.major, parsedVersion.minor, parsedVersion.patch
+    ].join('.'));
+  }
+
+  // return prefixed api version
+  apiVersion = `${prefix}${apiVersion}`;
+  return apiVersion;
+};
 
 
 /* exports env */
