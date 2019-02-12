@@ -1,3 +1,9 @@
+#### 0.5.0 (2019-02-12)
+
+##### New Features
+
+*  add api version generator from API_VERSION env variable ([68caeda4](https://github.com/lykmapipo/env/commit/68caeda4acfca0511f5c15ae2c8ea1ab2f689748))
+
 #### 0.4.0 (2019-02-06)
 
 ##### Refactors
