@@ -38,7 +38,10 @@ dotenv.load({ path: path.resolve(process.env.BASE_PATH, '.env') });
  * const { get } = require('@lykmapipo/env');
  * const BASE_PATH = get('BASE_PATH', process.cwd());
  */
-const get = (key, defaultValue) => _.get(process.env, key, defaultValue);
+const get = (key, defaultValue) => {
+  const value = _.get(process.env, key, defaultValue);
+  return value;
+};
 
 
 /**
@@ -165,8 +168,8 @@ const getString = function getString(key, defaultValue) {
 
 
 /**
- * @function getString
- * @name getString
+ * @function getStrings
+ * @name getStrings
  * @description get array of strings from environment variable
  * @param {String} key value key
  * @param {String[]} [defaultValue] value to return if key not exists
@@ -178,8 +181,8 @@ const getString = function getString(key, defaultValue) {
  * @static
  * @public
  * @example
- * const { getString } = require('@lykmapipo/env');
- * const categories = getString('CATEGORIES'); //=> ['Fashion', 'Technology']
+ * const { getStrings } = require('@lykmapipo/env');
+ * const categories = getStrings('CATEGORIES'); //=> ['Fashion', 'Technology']
  */
 const getStrings = (key, defaultValue) => {
   let strings = getArray(key, defaultValue);
@@ -187,7 +190,25 @@ const getStrings = (key, defaultValue) => {
   return strings;
 };
 
-const getBoolean = function getBoolean(key, defaultValue) {
+
+/**
+ * @function getBoolean
+ * @name getBoolean
+ * @description get boolean value from environment variable
+ * @param {String} key value key
+ * @param {Boolean} [defaultValue] value to return if key not exists
+ * @return {Boolean} environment value
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { getBoolean } = require('@lykmapipo/env');
+ * const debug = getBoolean('DEBUG'); //=> true
+ */
+const getBoolean = (key, defaultValue) => {
   let value = get(key, defaultValue);
   if (value === 'false') { value = false; }
   if (value === 'true') { value = true; }
@@ -196,13 +217,94 @@ const getBoolean = function getBoolean(key, defaultValue) {
 };
 
 
-/* execution environment shortcuts */
-const is = function (_env) {
-  return get('NODE_ENV') === _env;
-};
+/**
+ * @function is
+ * @name is
+ * @description check if node environment is same as given
+ * @param {String} env value of env to test
+ * @return {Boolean} true if its a tested node environment else false
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { is } = require('@lykmapipo/env');
+ * const test = is('TEST'); //=> true
+ */
+const is = env => get('NODE_ENV') === env;
+
+
+/**
+ * @function isTest
+ * @name isTest
+ * @description check if node environment is test
+ * @return {Boolean} true if its a test node environment else false
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { isTest } = require('@lykmapipo/env');
+ * const test = isTest(); //=> true
+ */
 const isTest = () => is('test');
+
+
+/**
+ * @function isDevelopment
+ * @name isDevelopment
+ * @description check if node environment is development
+ * @return {Boolean} true if its a development node environment else false
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { isDevelopment } = require('@lykmapipo/env');
+ * const isDev = isDevelopment(); //=> true
+ */
 const isDevelopment = () => is('development');
+
+
+/**
+ * @function isProduction
+ * @name isProduction
+ * @description check if node environment is production
+ * @return {Boolean} true if its a production node environment else false
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { isProduction } = require('@lykmapipo/env');
+ * const isProd = isProduction(); //=> true
+ */
 const isProduction = () => is('production');
+
+
+/**
+ * @function isLocal
+ * @name isLocal
+ * @description check if node environment is development or test
+ * @return {Boolean} true if its a development or test node environment else false
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { isLocal } = require('@lykmapipo/env');
+ * const local = isLocal(); //=> true
+ */
 const isLocal = () => (isTest() || isDevelopment());
 
 
