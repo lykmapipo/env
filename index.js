@@ -117,6 +117,29 @@ const isDevelopment = () => is('development');
 const isProduction = () => is('production');
 const isLocal = () => (isTest() || isDevelopment());
 
+
+/**
+ * @function apiVersion
+ * @name apiVersion
+ * @description parse api version from environment variable
+ * @param {Object} [optns]
+ * @param {String} [optns.version=1.0.0] value to use to parse api version
+ * @param {String} [optns.prefix=v] prefix to set on parsed api version
+ * @param {Boolean} [optns.major=true] whether to allow major part
+ * @param {Boolean} [optns.minor=false] whether to allow minor part
+ * @param {Boolean} [optns.patch=false] whether to allow patch part
+ * @return {String} parsed environment api version
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { apiVersion } = require('@lykmapipo/env');
+ * const version = apiVersion(); //=> v1
+ * const version = apiVersion({ version: '2.0.0' }); //=> v2
+ */
 const apiVersion = optns => {
   // ensure options
   const options = _.merge({}, {
@@ -131,16 +154,16 @@ const apiVersion = optns => {
   // parse api version
   const parsedVersion = semver.coerce(getString('API_VERSION', version));
 
-  //prepare exposed api version
+  // prepare exposed api version
   let apiVersion = parsedVersion.major;
 
-  //allow minor
+  // allow minor
   if (minor) {
     apiVersion =
       ([parsedVersion.major, parsedVersion.minor].join('.'));
   }
 
-  //allow patch
+  // allow patch
   if (patch) {
     apiVersion = ([
       parsedVersion.major, parsedVersion.minor, parsedVersion.patch

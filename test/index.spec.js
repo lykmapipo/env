@@ -34,6 +34,7 @@ const {
 } = require(path.join(__dirname, '..'));
 
 describe('env', () => {
+
   it('should be able to get raw value', () => {
     const value = get('LOCALES');
     expect(value).to.exist;
@@ -131,16 +132,6 @@ describe('env', () => {
     expect(value).to.be.equal(5000);
   });
 
-  it('should be compute api version', () => {
-    const version = apiVersion();
-    expect(version).to.exist;
-    expect(version).to.be.equal('v1');
-
-    expect(apiVersion({ minor: true })).to.be.equal('v1.0');
-    expect(apiVersion({ patch: true })).to.be.equal('v1.0.0');
-    expect(apiVersion({ version: 2 })).to.be.equal('v2');
-  });
-
   it('should be able to get .env value', () => {
     let value = get('LOG');
     expect(value).to.exist;
@@ -150,35 +141,40 @@ describe('env', () => {
     expect(value).to.be.false;
   });
 
-  describe('shortcuts', () => {
 
-    it('should be have available', () => {
+  it('should be able to test node environment', () => {
+    expect(is).to.exist;
+    expect(is).to.be.a('function');
 
-      expect(is).to.exist;
-      expect(is).to.be.a('function');
+    expect(isTest).to.exist;
+    expect(isTest).to.be.a('function');
 
-      expect(isTest).to.exist;
-      expect(isTest).to.be.a('function');
+    expect(isDevelopment).to.exist;
+    expect(isDevelopment).to.be.a('function');
 
-      expect(isDevelopment).to.exist;
-      expect(isDevelopment).to.be.a('function');
+    expect(isProduction).to.exist;
+    expect(isProduction).to.be.a('function');
 
-      expect(isProduction).to.exist;
-      expect(isProduction).to.be.a('function');
+    expect(isLocal).to.exist;
+    expect(isLocal).to.be.a('function');
+  });
 
-      expect(isLocal).to.exist;
-      expect(isLocal).to.be.a('function');
+  it('should be able to tell current node env', () => {
+    expect(isTest).to.exist;
+    expect(isTest()).to.be.true;
+    expect(isLocal()).to.be.true;
+    expect(isProduction()).to.be.false;
+    expect(isDevelopment()).to.be.false;
+  });
 
-    });
+  it('should be able to compute api version', () => {
+    const version = apiVersion();
+    expect(version).to.exist;
+    expect(version).to.be.equal('v1');
 
-    it('should be able to tell current runtime env', () => {
-      expect(isTest).to.exist;
-      expect(isTest()).to.be.true;
-      expect(isLocal()).to.be.true;
-      expect(isProduction()).to.be.false;
-      expect(isDevelopment()).to.be.false;
-    });
-
+    expect(apiVersion({ minor: true })).to.be.equal('v1.0');
+    expect(apiVersion({ patch: true })).to.be.equal('v1.0.0');
+    expect(apiVersion({ version: 2 })).to.be.equal('v2');
   });
 
 });
