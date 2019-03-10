@@ -20,6 +20,11 @@
     "environment",
     "execution"
   ],
+  "author": {
+    "name": "lykmapipo",
+    "email": "lallyelias87@gmail.com",
+    "url": "https://github.com/lykmapipo"
+  },
   "contributors": [
     {
       "name": "lykmapipo",
@@ -42,7 +47,6 @@
     "jshint-stylish": "^2.2.1",
     "mocha": "^5.2.0"
   },
-  "peerDependencies": {},
   "dependencies": {
     "dotenv": ">=6.2.0",
     "lodash": ">=4.17.11",

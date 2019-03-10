@@ -1,7 +1,7 @@
 # env
 
-[![Build module-starter](https://travis-ci.org/lykmapipo/env.svg?branch=master)](https://travis-ci.org/lykmapipo/env)
-[![Dependencies module-starter](https://david-dm.org/lykmapipo/env.svg?style=flat-square)](https://david-dm.org/lykmapipo/env)
+[![Build Status](https://travis-ci.org/lykmapipo/env.svg?branch=master)](https://travis-ci.org/lykmapipo/env)
+[![Dependencies Status](https://david-dm.org/lykmapipo/env.svg?style=flat-square)](https://david-dm.org/lykmapipo/env)
 
 Helper utilities for accessing environment variables
 
