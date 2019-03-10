@@ -97,8 +97,8 @@ const getArray = (key, defaultValue) => {
  * @name getNumbers
  * @description get array of numbers from environment variable
  * @param {String} key value key
- * @param {Array} [defaultValue] value to return if key not exists
- * @return {Array} environment value
+ * @param {Number[]} [defaultValue] value to return if key not exists
+ * @return {Number[]} environment value
  * @author lally elias <lallyelias87@mail.com>
  * @license MIT
  * @since 0.1.0
@@ -115,7 +115,25 @@ const getNumbers = (key, defaultValue) => {
   return numbers;
 };
 
-const getNumber = function getNumber(key, defaultValue) {
+
+/**
+ * @function getNumber
+ * @name getNumber
+ * @description get number value from environment variable
+ * @param {String} key value key
+ * @param {Number} [defaultValue] value to return if key not exists
+ * @return {Number} environment value
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { getNumber } = require('@lykmapipo/env');
+ * const categories = getNumber('DEFAULT_AGE'); //=> 11
+ */
+const getNumber = (key, defaultValue) => {
   let value = get(key, defaultValue);
   value = value ? Number(value) : value;
   return value;
