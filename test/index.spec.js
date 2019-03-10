@@ -16,102 +16,114 @@ process.env.CONTENT_TYPES = 'FAQ,Tariff';
 
 
 /* declarations */
-const env = require(path.join(__dirname, '..'));
 const {
+  get,
+  set,
   getNumber,
   getArray,
   getString,
   getStrings,
   getNumbers,
   getBoolean,
+  is,
+  isTest,
+  isProduction,
+  isLocal,
+  isDevelopment,
   apiVersion
-} = env;
+} = require(path.join(__dirname, '..'));
 
-describe('env', function () {
-
-  it('should be able to get raw value', function () {
-    const value = env('LOCALES');
+describe('env', () => {
+  it('should be able to get raw value', () => {
+    const value = get('LOCALES');
     expect(value).to.exist;
     expect(value).to.be.equal(process.env.LOCALES);
   });
 
-  it('should be able to get raw value', function () {
-    const value = env('Any', 'Any');
+  it('should be able set raw value', () => {
+    const SOME = set('SOME', 'Some');
+    const value = get('SOME');
+    expect(value).to.exist;
+    expect(value).to.be.equal(SOME);
+  });
+
+  it('should be able to get raw value', () => {
+    const value = get('Any', 'Any');
     expect(value).to.exist;
     expect(value).to.be.equal('Any');
   });
 
-  it('should be able to get string value', function () {
+  it('should be able to get string value', () => {
     const value = getString('DEFAULT_COUNTRY_CODE');
     expect(value).to.exist;
     expect(value).to.be.a('string');
     expect(value).to.be.equal('TZ');
   });
 
-  it('should be able to get string value', function () {
+  it('should be able to get string value', () => {
     const value = getString('DEFAULT_CITY', 'Dar es salaam');
     expect(value).to.exist;
     expect(value).to.be.a('string');
     expect(value).to.be.equal('Dar es salaam');
   });
 
-  it('should be able to get number value', function () {
+  it('should be able to get number value', () => {
     const value = getNumber('DEFAULT_AGE');
     expect(value).to.exist;
     expect(value).to.be.a('number');
     expect(value).to.be.equal(14);
   });
 
-  it('should be able to get number value', function () {
+  it('should be able to get number value', () => {
     const value = getNumber('DEFAULT_PRICE', 55.11);
     expect(value).to.exist;
     expect(value).to.be.a('number');
     expect(value).to.be.equal(55.11);
   });
 
-  it('should be able to get boolean value', function () {
+  it('should be able to get boolean value', () => {
     const value = getBoolean('DEBUG', false);
     expect(value).to.exist;
     expect(value).to.be.a('boolean');
     expect(value).to.be.true;
   });
 
-  it('should be able to get array value', function () {
+  it('should be able to get array value', () => {
     const value = getArray('LOCALES');
     expect(value).to.exist;
     expect(value).to.be.an('array');
     expect(value).to.be.eql(['en', 'sw', 'fr']);
   });
 
-  it('should be able to get array value', function () {
+  it('should be able to get array value', () => {
     const value = getArray('ANIMALS', ['elephant']);
     expect(value).to.exist;
     expect(value).to.be.an('array');
     expect(value).to.be.eql(['elephant']);
   });
 
-  it('should be able to get array of strings', function () {
+  it('should be able to get array of strings', () => {
     const value = getStrings('ALLOWED_AGES');
     expect(value).to.exist;
     expect(value).to.be.an('array');
     expect(value).to.be.eql(['14', '15', '16']);
   });
 
-  it('should be able to get array of numbers', function () {
+  it('should be able to get array of numbers', () => {
     const value = getNumbers('ALLOWED_AGES');
     expect(value).to.exist;
     expect(value).to.be.an('array');
     expect(value).to.be.eql([14, 15, 16]);
   });
 
-  it('should be able to get base path', function () {
-    const value = env('BASE_PATH');
+  it('should be able to get base path', () => {
+    const value = get('BASE_PATH');
     expect(value).to.exist;
     expect(value).to.be.equal(process.env.BASE_PATH);
   });
 
-  it('should be able to get .env value', function () {
-    let value = env('PORT');
+  it('should be able to get .env value', () => {
+    let value = get('PORT');
     expect(value).to.exist;
     expect(value).to.be.equal('5000');
     value = getNumber('PORT');
@@ -119,7 +131,7 @@ describe('env', function () {
     expect(value).to.be.equal(5000);
   });
 
-  it('should be compute api version', function () {
+  it('should be compute api version', () => {
     const version = apiVersion();
     expect(version).to.exist;
     expect(version).to.be.equal('v1');
@@ -129,8 +141,8 @@ describe('env', function () {
     expect(apiVersion({ version: 2 })).to.be.equal('v2');
   });
 
-  it('should be able to get .env value', function () {
-    let value = env('LOG');
+  it('should be able to get .env value', () => {
+    let value = get('LOG');
     expect(value).to.exist;
     expect(value).to.be.equal('false');
     value = getBoolean('LOG');
@@ -138,33 +150,33 @@ describe('env', function () {
     expect(value).to.be.false;
   });
 
-  describe('shortcuts', function () {
+  describe('shortcuts', () => {
 
-    it('should be have available', function () {
+    it('should be have available', () => {
 
-      expect(env.is).to.exist;
-      expect(env.is).to.be.a('function');
+      expect(is).to.exist;
+      expect(is).to.be.a('function');
 
-      expect(env.isTest).to.exist;
-      expect(env.isTest).to.be.a('function');
+      expect(isTest).to.exist;
+      expect(isTest).to.be.a('function');
 
-      expect(env.isDev).to.exist;
-      expect(env.isDev).to.be.a('function');
+      expect(isDevelopment).to.exist;
+      expect(isDevelopment).to.be.a('function');
 
-      expect(env.isProd).to.exist;
-      expect(env.isProd).to.be.a('function');
+      expect(isProduction).to.exist;
+      expect(isProduction).to.be.a('function');
 
-      expect(env.isLocal).to.exist;
-      expect(env.isLocal).to.be.a('function');
+      expect(isLocal).to.exist;
+      expect(isLocal).to.be.a('function');
 
     });
 
-    it('should be able to tell current runtime env', function () {
-      expect(env.isTest).to.exist;
-      expect(env.isTest()).to.be.true;
-      expect(env.isLocal()).to.be.true;
-      expect(env.isProd()).to.be.false;
-      expect(env.isDev()).to.be.false;
+    it('should be able to tell current runtime env', () => {
+      expect(isTest).to.exist;
+      expect(isTest()).to.be.true;
+      expect(isLocal()).to.be.true;
+      expect(isProduction()).to.be.false;
+      expect(isDevelopment()).to.be.false;
     });
 
   });

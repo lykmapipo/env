@@ -8,37 +8,64 @@ const semver = require('semver');
 const dotenv = require('dotenv');
 
 
-/**
- * ensure process NODE_ENV
- * @default development
- */
+// ensure process NODE_ENV
 process.env.NODE_ENV = (process.env.NODE_ENV || 'development');
 
 
-/**
- * ensure process BASE_PATH
- * @default process.cwd()
- */
+// ensure process BASE_PATH
 process.env.BASE_PATH =
   path.resolve(process.env.BASE_PATH || process.cwd());
 
 
-/**
- * load configuration from .env file from BASE_PATH
- * @see  {@link https://github.com/motdotla/dotenv}
- */
+// load configuration from .env file from BASE_PATH
 dotenv.load({ path: path.resolve(process.env.BASE_PATH, '.env') });
 
 
-/* definition */
-function env(key, defaultValue) {
-  const value = process.env[key] || defaultValue;
+/**
+ * @function get
+ * @name get
+ * @description get environment variable
+ * @param {String} key value key
+ * @param {Mixed} [defaultValue] value to return if key not exists
+ * @return {Mixed} environment value
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { get } = require('@lykmapipo/env');
+ * const BASE_PATH = get('BASE_PATH', process.cwd());
+ */
+const get = (key, defaultValue) => _.get(process.env, key, defaultValue);
+
+
+/**
+ * @function set
+ * @name set
+ * @description set environment variable
+ * @param {String} key value key
+ * @param {Mixed} [value] value to set on key
+ * @return {Mixed} environment value
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { set } = require('@lykmapipo/env');
+ * const BASE_PATH = set('BASE_PATH', process.cwd());
+ */
+const set = (key, value) => {
+  _.set(process.env, key, value);
   return value;
-}
+};
 
 
 /* helpers */
-env.getArray = function getArray(key, defaultValue) {
+const getArray = function getArray(key, defaultValue) {
   let value = [].concat(defaultValue);
   if (!_.isEmpty(key)) {
     value =
@@ -48,32 +75,32 @@ env.getArray = function getArray(key, defaultValue) {
   return _.uniq(_.compact(value));
 };
 
-env.getNumbers = function getNumbers(key, defaultValue) {
-  let numbers = env.getArray(key, defaultValue);
+const getNumbers = function getNumbers(key, defaultValue) {
+  let numbers = getArray(key, defaultValue);
   numbers = _.map(numbers, function (number) { return Number(number); });
   return numbers;
 };
 
-env.getNumber = function getNumber(key, defaultValue) {
-  let value = env(key, defaultValue);
+const getNumber = function getNumber(key, defaultValue) {
+  let value = get(key, defaultValue);
   value = value ? Number(value) : value;
   return value;
 };
 
-env.getString = function getString(key, defaultValue) {
-  let value = env(key, defaultValue);
+const getString = function getString(key, defaultValue) {
+  let value = get(key, defaultValue);
   value = value ? String(value) : value;
   return value;
 };
 
-env.getStrings = function getStrings(key, defaultValue) {
-  let strings = env.getArray(key, defaultValue);
+const getStrings = function getStrings(key, defaultValue) {
+  let strings = getArray(key, defaultValue);
   strings = _.map(strings, function (number) { return String(number); });
   return strings;
 };
 
-env.getBoolean = function getBoolean(key, defaultValue) {
-  let value = env(key, defaultValue);
+const getBoolean = function getBoolean(key, defaultValue) {
+  let value = get(key, defaultValue);
   if (value === 'false') { value = false; }
   if (value === 'true') { value = true; }
   value = value ? Boolean(value) : value;
@@ -82,15 +109,15 @@ env.getBoolean = function getBoolean(key, defaultValue) {
 
 
 /* execution environment shortcuts */
-env.is = function (_env) {
-  return env('NODE_ENV') === _env;
+const is = function (_env) {
+  return get('NODE_ENV') === _env;
 };
-env.isTest = () => env.is('test');
-env.isDevelopment = env.isDev = () => env.is('development');
-env.isProduction = env.isProd = () => env.is('production');
-env.isLocal = () => (env.isTest() || env.isDev());
+const isTest = () => is('test');
+const isDevelopment = () => is('development');
+const isProduction = () => is('production');
+const isLocal = () => (isTest() || isDevelopment());
 
-env.apiVersion = optns => {
+const apiVersion = optns => {
   // ensure options
   const options = _.merge({}, {
     version: '1.0.0',
@@ -102,7 +129,7 @@ env.apiVersion = optns => {
   const { version, prefix, minor, patch } = options;
 
   // parse api version
-  const parsedVersion = semver.coerce(env.getString('API_VERSION', version));
+  const parsedVersion = semver.coerce(getString('API_VERSION', version));
 
   //prepare exposed api version
   let apiVersion = parsedVersion.major;
@@ -127,4 +154,19 @@ env.apiVersion = optns => {
 
 
 /* exports env */
-module.exports = exports = env;
+module.exports = exports = {
+  get,
+  set,
+  getArray,
+  getNumbers,
+  getNumber,
+  getString,
+  getStrings,
+  getBoolean,
+  is,
+  isTest,
+  isDevelopment,
+  isProduction,
+  isLocal,
+  apiVersion
+};
