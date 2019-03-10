@@ -91,9 +91,27 @@ const getArray = (key, defaultValue) => {
   return value;
 };
 
-const getNumbers = function getNumbers(key, defaultValue) {
+
+/**
+ * @function getNumbers
+ * @name getNumbers
+ * @description get array of numbers from environment variable
+ * @param {String} key value key
+ * @param {Array} [defaultValue] value to return if key not exists
+ * @return {Array} environment value
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { getNumbers } = require('@lykmapipo/env');
+ * const categories = getNumbers('AGES'); //=> [11, 18]
+ */
+const getNumbers = (key, defaultValue) => {
   let numbers = getArray(key, defaultValue);
-  numbers = _.map(numbers, function (number) { return Number(number); });
+  numbers = _.map(numbers, number => Number(number));
   return numbers;
 };
 
