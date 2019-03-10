@@ -107,7 +107,7 @@ const getArray = (key, defaultValue) => {
  * @public
  * @example
  * const { getNumbers } = require('@lykmapipo/env');
- * const categories = getNumbers('AGES'); //=> [11, 18]
+ * const ages = getNumbers('AGES'); //=> [11, 18]
  */
 const getNumbers = (key, defaultValue) => {
   let numbers = getArray(key, defaultValue);
@@ -131,7 +131,7 @@ const getNumbers = (key, defaultValue) => {
  * @public
  * @example
  * const { getNumber } = require('@lykmapipo/env');
- * const categories = getNumber('DEFAULT_AGE'); //=> 11
+ * const defaultAge = getNumber('DEFAULT_AGE'); //=> 11
  */
 const getNumber = (key, defaultValue) => {
   let value = get(key, defaultValue);
@@ -139,15 +139,51 @@ const getNumber = (key, defaultValue) => {
   return value;
 };
 
+
+/**
+ * @function getString
+ * @name getString
+ * @description get string value from environment variable
+ * @param {String} key value key
+ * @param {String} [defaultValue] value to return if key not exists
+ * @return {String} environment value
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { getString } = require('@lykmapipo/env');
+ * const category = getString('DEFAULT_CATEGORY'); //=> 'Fashion'
+ */
 const getString = function getString(key, defaultValue) {
   let value = get(key, defaultValue);
   value = value ? String(value) : value;
   return value;
 };
 
-const getStrings = function getStrings(key, defaultValue) {
+
+/**
+ * @function getString
+ * @name getString
+ * @description get array of strings from environment variable
+ * @param {String} key value key
+ * @param {String[]} [defaultValue] value to return if key not exists
+ * @return {String[]} environment value
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { getString } = require('@lykmapipo/env');
+ * const categories = getString('CATEGORIES'); //=> ['Fashion', 'Technology']
+ */
+const getStrings = (key, defaultValue) => {
   let strings = getArray(key, defaultValue);
-  strings = _.map(strings, function (number) { return String(number); });
+  strings = _.map(strings, string => String(string));
   return strings;
 };
 
