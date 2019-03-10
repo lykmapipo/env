@@ -5,7 +5,8 @@
 const path = require('path');
 const { expect } = require('chai');
 
-
+// set env
+process.env.NODE_ENV = 'test';
 process.env.BASE_PATH = path.resolve(__dirname);
 process.env.LOCALES = 'en,sw,fr';
 process.env.DEFAULT_COUNTRY_CODE = 'TZ';
@@ -48,7 +49,7 @@ describe('env', () => {
     expect(value).to.be.equal(SOME);
   });
 
-  it('should be able to get raw value', () => {
+  it('should be able to get raw default value if not exist', () => {
     const value = get('Any', 'Any');
     expect(value).to.exist;
     expect(value).to.be.equal('Any');
@@ -61,7 +62,7 @@ describe('env', () => {
     expect(value).to.be.equal('TZ');
   });
 
-  it('should be able to get string value', () => {
+  it('should be able to get string default value if not exist', () => {
     const value = getString('DEFAULT_CITY', 'Dar es salaam');
     expect(value).to.exist;
     expect(value).to.be.a('string');
@@ -75,7 +76,7 @@ describe('env', () => {
     expect(value).to.be.equal(14);
   });
 
-  it('should be able to get number value', () => {
+  it('should be able to get number default value if not exist', () => {
     const value = getNumber('DEFAULT_PRICE', 55.11);
     expect(value).to.exist;
     expect(value).to.be.a('number');
@@ -83,10 +84,17 @@ describe('env', () => {
   });
 
   it('should be able to get boolean value', () => {
-    const value = getBoolean('DEBUG', false);
+    const value = getBoolean('DEBUG');
     expect(value).to.exist;
     expect(value).to.be.a('boolean');
     expect(value).to.be.true;
+  });
+
+  it('should be able to get boolean default value if not exist', () => {
+    const value = getBoolean('SET_DEBUG', false);
+    expect(value).to.exist;
+    expect(value).to.be.a('boolean');
+    expect(value).to.be.false;
   });
 
   it('should be able to get array value', () => {
@@ -96,7 +104,7 @@ describe('env', () => {
     expect(value).to.be.eql(['en', 'sw', 'fr']);
   });
 
-  it('should be able to get array value', () => {
+  it('should be able to get array default value if not exist', () => {
     const value = getArray('ANIMALS', ['elephant']);
     expect(value).to.exist;
     expect(value).to.be.an('array');
