@@ -64,15 +64,31 @@ const set = (key, value) => {
 };
 
 
-/* helpers */
-const getArray = function getArray(key, defaultValue) {
+/**
+ * @function getArray
+ * @name getArray
+ * @description get array value from environment variable
+ * @param {String} key value key
+ * @param {Array} [defaultValue] value to return if key not exists
+ * @return {Array} environment value
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { getArray } = require('@lykmapipo/env');
+ * const categories = getArray('CATEGORIES'); //=> ['Fashion', 'Technology']
+ */
+const getArray = (key, defaultValue) => {
   let value = [].concat(defaultValue);
   if (!_.isEmpty(key)) {
-    value =
-      ([].concat(value).concat(_.get(process.env, key, '').split(',')));
+    value = [...value, ...get(key, '').split(',')];
   }
   value = _.map(value, _.trim);
-  return _.uniq(_.compact(value));
+  value = _.uniq(_.compact(value));
+  return value;
 };
 
 const getNumbers = function getNumbers(key, defaultValue) {
