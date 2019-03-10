@@ -21,30 +21,24 @@ npm install --save @lykmapipo/env
 ## Usage
 
 ```js
-const env = require('@lykmapipo/env');
-const { getString, getNumber, getStrings, getNumbers, apiVersion } = env;
+const {
+  getString,
+  getNumber,
+  getStrings,
+  getNumbers,
+  apiVersion
+} = require('@lykmapipo/env');
 
-...
-
-const LOCALE = env('LOCALE', 'en');
+const LOCALE = get('LOCALE', 'en');
 const LOCALE = getString('LOCALE', 'en');
 const LOCALES = getStrings('LOCALES', ['en']);
-
-...
 
 const PORT = getNumber('PORT', 9000);
 const PORTS = getNumbers('PORTS', [3000, 9000, 8080]);
 
-...
-
 const DEBUG = getBoolean('DEBUG', false);
 
-...
-
-const version = apiVersion(); //v1
-
-...
-
+const version = apiVersion(); //=> v1
 ```
 
 ## Test

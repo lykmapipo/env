@@ -233,7 +233,7 @@ const getBoolean = (key, defaultValue) => {
  * const { is } = require('@lykmapipo/env');
  * const test = is('TEST'); //=> true
  */
-const is = env => get('NODE_ENV') === env;
+const is = env => _.toLower(get('NODE_ENV')) === _.toLower(env);
 
 
 /**
@@ -309,6 +309,24 @@ const isLocal = () => (isTest() || isDevelopment());
 
 
 /**
+ * @function isHeroku
+ * @name isHeroku
+ * @description check if runtime environment is heroku
+ * @return {Boolean} true if its runtime environment is heroku else false
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { isHeroku } = require('@lykmapipo/env');
+ * const heroku = isHeroku(); //=> true
+ */
+const isHeroku = () => _.toLower(get('RUNTIME_ENV')) === 'heroku';
+
+
+/**
  * @function apiVersion
  * @name apiVersion
  * @description parse api version from environment variable
@@ -381,5 +399,6 @@ module.exports = exports = {
   isDevelopment,
   isProduction,
   isLocal,
+  isHeroku,
   apiVersion
 };

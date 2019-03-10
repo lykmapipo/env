@@ -29,8 +29,9 @@ const {
   is,
   isTest,
   isProduction,
-  isLocal,
   isDevelopment,
+  isLocal,
+  isHeroku,
   apiVersion
 } = require(path.join(__dirname, '..'));
 
@@ -173,6 +174,14 @@ describe('env', () => {
     expect(isLocal()).to.be.true;
     expect(isProduction()).to.be.false;
     expect(isDevelopment()).to.be.false;
+  });
+
+  it('should be able to tell if current runtime is heroku', () => {
+    expect(isHeroku).to.exist;
+    expect(isHeroku()).to.be.false;
+
+    set('RUNTIME_ENV', 'heroku');
+    expect(isHeroku()).to.be.true;
   });
 
   it('should be able to compute api version', () => {
