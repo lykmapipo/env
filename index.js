@@ -18,7 +18,7 @@ process.env.BASE_PATH =
 
 
 // load configuration from .env file from BASE_PATH
-dotenv.load({ path: path.resolve(process.env.BASE_PATH, '.env') });
+dotenv.config({ path: path.resolve(process.env.BASE_PATH, '.env') });
 
 
 /**
