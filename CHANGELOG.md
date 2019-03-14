@@ -1,3 +1,9 @@
+#### 0.6.1 (2019-03-14)
+
+##### Refactors
+
+*  fix dotenv looad to use config ([7cee9b09](https://github.com/lykmapipo/env/commit/7cee9b092cfad6c433d59c9b06ef7ffcac3e4df4))
+
 #### 0.6.0 (2019-03-10)
 
 ##### Chores
