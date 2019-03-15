@@ -47,6 +47,7 @@
     "grunt-contrib-jshint": "^2.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-mocha-test": "^0.13.3",
+    "grunt-prettier": "^1.1.1",
     "jshint-stylish": "^2.2.1",
     "mocha": "^6.0.2",
     "prettier": "^1.16.4",

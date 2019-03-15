@@ -1,75 +1,60 @@
 'use strict';
 
-module.exports = function (grunt) {
-
+module.exports = function(grunt) {
   // add grunt tasks.
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-prettier');
 
   grunt.initConfig({
     mochaTest: {
       unit: {
         options: {
           reporter: 'spec',
-          timeout: 20000
+          timeout: 20000,
         },
-        src: [
-          'test/**/*.js',
-          'test/unit/**/*.js',
-          '!test/integration/**/*.js'
-        ]
+        src: ['test/**/*.js', 'test/unit/**/*.js', '!test/integration/**/*.js'],
       },
       integration: {
         options: {
           reporter: 'spec',
-          timeout: 20000
+          timeout: 20000,
         },
-        src: [
-          'test/**/*.js',
-          'test/integration/**/*.js',
-          '!test/unit/**/*.js'
-        ]
-      }
+        src: ['test/**/*.js', 'test/integration/**/*.js', '!test/unit/**/*.js'],
+      },
     },
     jshint: {
       options: {
         reporter: require('jshint-stylish'),
-        jshintrc: '.jshintrc'
+        jshintrc: '.jshintrc',
       },
       main: {
-        src: [
-          'Gruntfile.js',
-          'index.js',
-          'lib/**/*.js',
-        ]
+        src: ['Gruntfile.js', 'index.js', 'lib/**/*.js'],
       },
       test: {
         options: {
-          jshintrc: 'test/.jshintrc'
+          jshintrc: 'test/.jshintrc',
         },
-        src: [
-          'test/**/*.js'
-        ]
-      }
+        src: ['test/**/*.js'],
+      },
+    },
+    prettier: {
+      files: {
+        src: ['src/**/*.js'],
+      },
     },
     watch: {
       all: {
-        files: [
-          'Gruntfile.js',
-          'index.js',
-          'lib/**/*.js',
-          'test/**/*.js'
-        ],
-        tasks: ['default']
-      }
-    }
+        files: ['Gruntfile.js', 'index.js', 'lib/**/*.js', 'test/**/*.js'],
+        tasks: ['default'],
+      },
+    },
   });
 
   //custom tasks
-  grunt.registerTask('default', ['jshint', 'mochaTest', 'watch']);
+  grunt.registerTask('default', ['jshint', 'prettier', 'mochaTest', 'watch']);
   grunt.registerTask('test', ['jshint', 'mochaTest']);
   grunt.registerTask('integration', ['jshint', 'mochaTest:integration']);
   grunt.registerTask('unit', ['jshint', 'mochaTest:unit']);
-
 };
