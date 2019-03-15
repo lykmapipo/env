@@ -33,7 +33,7 @@ const {
   isLocal,
   isHeroku,
   apiVersion
-} = require(path.join(__dirname, '..'));
+} = require(path.join(__dirname, '../lib/'));
 
 describe('env', () => {
 

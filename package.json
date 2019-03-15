@@ -2,9 +2,12 @@
   "name": "@lykmapipo/env",
   "version": "0.6.1",
   "description": "Helper utilities for accessing environment variables",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "scripts": {
-    "test": "grunt test"
+    "clean": "rimraf lib dist es umd",
+    "test": "grunt test",
+    "build": "npm run clean && rollup -c"
   },
   "repository": {
     "type": "git",
@@ -45,7 +48,9 @@
     "grunt-contrib-watch": "^1.1.0",
     "grunt-mocha-test": "^0.13.3",
     "jshint-stylish": "^2.2.1",
-    "mocha": "^6.0.2"
+    "mocha": "^6.0.2",
+    "prettier": "^1.16.4",
+    "rollup": "^1.6.0"
   },
   "dependencies": {
     "dotenv": ">=7.0.0",
