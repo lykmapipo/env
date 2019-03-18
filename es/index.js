@@ -1,25 +1,16 @@
-'use strict';
-
-
-/* dependencies */
-const path = require('path');
-const _ = require('lodash');
-const semver = require('semver');
-const dotenv = require('dotenv');
-
+import path from 'path';
+import _ from 'lodash';
+import semver from 'semver';
+import dotenv from 'dotenv';
 
 // ensure process NODE_ENV
-process.env.NODE_ENV = (process.env.NODE_ENV || 'development');
-
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 // ensure process BASE_PATH
-process.env.BASE_PATH =
-  path.resolve(process.env.BASE_PATH || process.cwd());
-
+process.env.BASE_PATH = path.resolve(process.env.BASE_PATH || process.cwd());
 
 // load configuration from .env file from BASE_PATH
 dotenv.config({ path: path.resolve(process.env.BASE_PATH, '.env') });
-
 
 /**
  * @function get
@@ -43,7 +34,6 @@ const get = (key, defaultValue) => {
   return value;
 };
 
-
 /**
  * @function set
  * @name set
@@ -65,7 +55,6 @@ const set = (key, value) => {
   _.set(process.env, key, value);
   return value;
 };
-
 
 /**
  * @function getArray
@@ -94,7 +83,6 @@ const getArray = (key, defaultValue) => {
   return value;
 };
 
-
 /**
  * @function getNumbers
  * @name getNumbers
@@ -117,7 +105,6 @@ const getNumbers = (key, defaultValue) => {
   numbers = _.map(numbers, number => Number(number));
   return numbers;
 };
-
 
 /**
  * @function getNumber
@@ -142,7 +129,6 @@ const getNumber = (key, defaultValue) => {
   return value;
 };
 
-
 /**
  * @function getString
  * @name getString
@@ -165,7 +151,6 @@ const getString = function getString(key, defaultValue) {
   value = value ? String(value) : value;
   return value;
 };
-
 
 /**
  * @function getStrings
@@ -190,7 +175,6 @@ const getStrings = (key, defaultValue) => {
   return strings;
 };
 
-
 /**
  * @function getBoolean
  * @name getBoolean
@@ -210,12 +194,15 @@ const getStrings = (key, defaultValue) => {
  */
 const getBoolean = (key, defaultValue) => {
   let value = get(key, defaultValue);
-  if (value === 'false') { value = false; }
-  if (value === 'true') { value = true; }
+  if (value === 'false') {
+    value = false;
+  }
+  if (value === 'true') {
+    value = true;
+  }
   value = value ? Boolean(value) : value;
   return value;
 };
-
 
 /**
  * @function is
@@ -235,7 +222,6 @@ const getBoolean = (key, defaultValue) => {
  */
 const is = env => _.toLower(get('NODE_ENV')) === _.toLower(env);
 
-
 /**
  * @function isTest
  * @name isTest
@@ -252,7 +238,6 @@ const is = env => _.toLower(get('NODE_ENV')) === _.toLower(env);
  * const test = isTest(); //=> true
  */
 const isTest = () => is('test');
-
 
 /**
  * @function isDevelopment
@@ -271,7 +256,6 @@ const isTest = () => is('test');
  */
 const isDevelopment = () => is('development');
 
-
 /**
  * @function isProduction
  * @name isProduction
@@ -289,7 +273,6 @@ const isDevelopment = () => is('development');
  */
 const isProduction = () => is('production');
 
-
 /**
  * @function isLocal
  * @name isLocal
@@ -305,8 +288,7 @@ const isProduction = () => is('production');
  * const { isLocal } = require('@lykmapipo/env');
  * const local = isLocal(); //=> true
  */
-const isLocal = () => (isTest() || isDevelopment());
-
+const isLocal = () => isTest() || isDevelopment();
 
 /**
  * @function isHeroku
@@ -324,7 +306,6 @@ const isLocal = () => (isTest() || isDevelopment());
  * const heroku = isHeroku(); //=> true
  */
 const isHeroku = () => _.toLower(get('RUNTIME_ENV')) === 'heroku';
-
 
 /**
  * @function apiVersion
@@ -350,13 +331,17 @@ const isHeroku = () => _.toLower(get('RUNTIME_ENV')) === 'heroku';
  */
 const apiVersion = optns => {
   // ensure options
-  const options = _.merge({}, {
-    version: '1.0.0',
-    prefix: 'v',
-    major: true,
-    minor: false,
-    patch: false
-  }, optns);
+  const options = _.merge(
+    {},
+    {
+      version: '1.0.0',
+      prefix: 'v',
+      major: true,
+      minor: false,
+      patch: false,
+    },
+    optns
+  );
   const { version, prefix, minor, patch } = options;
 
   // parse api version
@@ -367,15 +352,16 @@ const apiVersion = optns => {
 
   // allow minor
   if (minor) {
-    apiVersion =
-      ([parsedVersion.major, parsedVersion.minor].join('.'));
+    apiVersion = [parsedVersion.major, parsedVersion.minor].join('.');
   }
 
   // allow patch
   if (patch) {
-    apiVersion = ([
-      parsedVersion.major, parsedVersion.minor, parsedVersion.patch
-    ].join('.'));
+    apiVersion = [
+      parsedVersion.major,
+      parsedVersion.minor,
+      parsedVersion.patch,
+    ].join('.');
   }
 
   // return prefixed api version
@@ -383,22 +369,4 @@ const apiVersion = optns => {
   return apiVersion;
 };
 
-
-/* exports env */
-module.exports = exports = {
-  get,
-  set,
-  getArray,
-  getNumbers,
-  getNumber,
-  getString,
-  getStrings,
-  getBoolean,
-  is,
-  isTest,
-  isDevelopment,
-  isProduction,
-  isLocal,
-  isHeroku,
-  apiVersion
-};
+export { get, set, getArray, getNumbers, getNumber, getString, getStrings, getBoolean, is, isTest, isDevelopment, isProduction, isLocal, isHeroku, apiVersion };
