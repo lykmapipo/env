@@ -1,20 +1,7 @@
 import { resolve } from 'path';
 import { coerce } from 'semver';
 import { config } from 'dotenv';
-import {
-  once,
-  toNumber,
-  toString,
-  set as set$1,
-  get as get$1,
-  isEmpty,
-  map,
-  trim,
-  uniq,
-  compact,
-  toLower,
-  merge,
-} from 'lodash';
+import { once, toNumber, toString, set as set$1, get as get$1, isEmpty, map, trim, uniq, compact, toLower, merge } from 'lodash';
 
 /**
  * @function load
@@ -432,23 +419,4 @@ const apiVersion = optns => {
   return parsedApiVersion;
 };
 
-export {
-  apiVersion,
-  get,
-  getArray,
-  getBoolean,
-  getNumber,
-  getNumbers,
-  getString,
-  getStrings,
-  is,
-  isDevelopment,
-  isHeroku,
-  isLocal,
-  isProduction,
-  isTest,
-  load,
-  mapToNumber,
-  mapToString,
-  set,
-};
+export { apiVersion, get, getArray, getBoolean, getNumber, getNumbers, getString, getStrings, is, isDevelopment, isHeroku, isLocal, isProduction, isTest, load, mapToNumber, mapToString, set };
