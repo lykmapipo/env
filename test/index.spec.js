@@ -1,23 +1,9 @@
-'use strict';
-
-
 /* dependencies */
-const path = require('path');
-const { expect } = require('chai');
-
-// set env
-process.env.NODE_ENV = 'test';
-process.env.BASE_PATH = path.resolve(__dirname);
-process.env.LOCALES = 'en,sw,fr';
-process.env.DEFAULT_COUNTRY_CODE = 'TZ';
-process.env.DEFAULT_CITY = 'Dar es salaam';
-process.env.DEFAULT_AGE = 14;
-process.env.ALLOWED_AGES = '14,15, 16';
-process.env.CONTENT_TYPES = 'FAQ,Tariff';
-
+import path from 'path';
+import { expect } from 'chai';
 
 /* declarations */
-const {
+import {
   get,
   set,
   getNumber,
@@ -32,11 +18,20 @@ const {
   isDevelopment,
   isLocal,
   isHeroku,
-  apiVersion
-} = require(path.join(__dirname, '../lib/'));
+  apiVersion,
+} from '../src/index';
+
+// set env
+process.env.NODE_ENV = 'test';
+process.env.BASE_PATH = path.resolve(__dirname);
+process.env.LOCALES = 'en,sw,fr';
+process.env.DEFAULT_COUNTRY_CODE = 'TZ';
+process.env.DEFAULT_CITY = 'Dar es salaam';
+process.env.DEFAULT_AGE = 14;
+process.env.ALLOWED_AGES = '14,15, 16';
+process.env.CONTENT_TYPES = 'FAQ,Tariff';
 
 describe('env', () => {
-
   it('should be able to get raw value', () => {
     const value = get('LOCALES');
     expect(value).to.exist;
@@ -150,7 +145,6 @@ describe('env', () => {
     expect(value).to.be.false;
   });
 
-
   it('should be able to test node environment', () => {
     expect(is).to.exist;
     expect(is).to.be.a('function');
@@ -193,5 +187,4 @@ describe('env', () => {
     expect(apiVersion({ patch: true })).to.be.equal('v1.0.0');
     expect(apiVersion({ version: 2 })).to.be.equal('v2');
   });
-
 });

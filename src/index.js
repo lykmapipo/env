@@ -1,41 +1,76 @@
-'use strict';
-
-/* dependencies */
-import path from 'path';
-import _ from 'lodash';
-import semver from 'semver';
-import dotenv from 'dotenv';
-
-// ensure process NODE_ENV
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
-// ensure process BASE_PATH
-process.env.BASE_PATH = path.resolve(process.env.BASE_PATH || process.cwd());
-
-// load configuration from .env file from BASE_PATH
-dotenv.config({ path: path.resolve(process.env.BASE_PATH, '.env') });
+import { resolve } from 'path';
+import { coerce } from 'semver';
+import { config as loadEnv } from 'dotenv';
+import {
+  compact,
+  get as grab,
+  isEmpty,
+  map,
+  merge,
+  once,
+  set as define,
+  toLower,
+  toNumber,
+  toString,
+  trim,
+  uniq,
+} from 'lodash';
 
 /**
- * @function get
- * @name get
- * @description get environment variable
- * @param {String} key value key
- * @param {Mixed} [defaultValue] value to return if key not exists
- * @return {Mixed} environment value
+ * @function load
+ * @name load
+ * @description load environment variables from .env file only once
  * @author lally elias <lallyelias87@mail.com>
  * @license MIT
- * @since 0.1.0
+ * @since 0.7.0
  * @version 0.1.0
  * @static
  * @public
  * @example
- * const { get } = require('@lykmapipo/env');
- * const BASE_PATH = get('BASE_PATH', process.cwd());
+ * const { load } = require('@lykmapipo/env');
+ * const env = load();
  */
-export const get = (key, defaultValue) => {
-  const value = _.get(process.env, key, defaultValue);
-  return value;
-};
+export const load = once(() => {
+  // ensure NODE_ENV
+  process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+  // ensure BASE_PATH
+  process.env.BASE_PATH = process.env.BASE_PATH || process.cwd();
+  // load .env file
+  const path = resolve(process.env.BASE_PATH, '.env');
+  return loadEnv({ path });
+});
+
+/**
+ * @function mapToNumber
+ * @name mapToNumber
+ * @description convert provided value to number
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.7.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { mapToNumber } = require('@lykmapipo/env');
+ * const age = mapToNumber('3.2'); //=> 3.2
+ */
+export const mapToNumber = value => toNumber(value);
+
+/**
+ * @function mapToString
+ * @name mapToString
+ * @description convert provided value to string
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.7.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { mapToString } = require('@lykmapipo/env');
+ * const age = mapToString(3.2); //=> '3.2'
+ */
+export const mapToString = value => toString(value);
 
 /**
  * @function set
@@ -55,7 +90,32 @@ export const get = (key, defaultValue) => {
  * const BASE_PATH = set('BASE_PATH', process.cwd());
  */
 export const set = (key, value) => {
-  _.set(process.env, key, value);
+  define(process.env, key, value);
+  return value;
+};
+
+/**
+ * @function get
+ * @name get
+ * @description get environment variable
+ * @param {String} key value key
+ * @param {Mixed} [defaultValue] value to return if key not exists
+ * @return {Mixed} environment value
+ * @author lally elias <lallyelias87@mail.com>
+ * @license MIT
+ * @since 0.1.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { get } = require('@lykmapipo/env');
+ * const BASE_PATH = get('BASE_PATH', process.cwd());
+ */
+export const get = (key, defaultValue) => {
+  // ensure .env is loaded
+  load();
+  // get value
+  const value = grab(process.env, key, defaultValue);
   return value;
 };
 
@@ -78,11 +138,11 @@ export const set = (key, value) => {
  */
 export const getArray = (key, defaultValue) => {
   let value = [].concat(defaultValue);
-  if (!_.isEmpty(key)) {
+  if (!isEmpty(key)) {
     value = [...value, ...get(key, '').split(',')];
   }
-  value = _.map(value, _.trim);
-  value = _.uniq(_.compact(value));
+  value = map(value, trim);
+  value = uniq(compact(value));
   return value;
 };
 
@@ -105,7 +165,7 @@ export const getArray = (key, defaultValue) => {
  */
 export const getNumbers = (key, defaultValue) => {
   let numbers = getArray(key, defaultValue);
-  numbers = _.map(numbers, number => Number(number));
+  numbers = map(numbers, mapToNumber);
   return numbers;
 };
 
@@ -128,7 +188,7 @@ export const getNumbers = (key, defaultValue) => {
  */
 export const getNumber = (key, defaultValue) => {
   let value = get(key, defaultValue);
-  value = value ? Number(value) : value;
+  value = value ? mapToNumber(value) : value;
   return value;
 };
 
@@ -151,7 +211,7 @@ export const getNumber = (key, defaultValue) => {
  */
 export const getString = function getString(key, defaultValue) {
   let value = get(key, defaultValue);
-  value = value ? String(value) : value;
+  value = value ? mapToString(value) : value;
   return value;
 };
 
@@ -174,7 +234,7 @@ export const getString = function getString(key, defaultValue) {
  */
 export const getStrings = (key, defaultValue) => {
   let strings = getArray(key, defaultValue);
-  strings = _.map(strings, string => String(string));
+  strings = map(strings, mapToString);
   return strings;
 };
 
@@ -223,7 +283,7 @@ export const getBoolean = (key, defaultValue) => {
  * const { is } = require('@lykmapipo/env');
  * const test = is('TEST'); //=> true
  */
-export const is = env => _.toLower(get('NODE_ENV')) === _.toLower(env);
+export const is = env => toLower(get('NODE_ENV')) === toLower(env);
 
 /**
  * @function isTest
@@ -308,7 +368,7 @@ export const isLocal = () => isTest() || isDevelopment();
  * const { isHeroku } = require('@lykmapipo/env');
  * const heroku = isHeroku(); //=> true
  */
-export const isHeroku = () => _.toLower(get('RUNTIME_ENV')) === 'heroku';
+export const isHeroku = () => toLower(get('RUNTIME_ENV')) === 'heroku';
 
 /**
  * @function apiVersion
@@ -334,7 +394,7 @@ export const isHeroku = () => _.toLower(get('RUNTIME_ENV')) === 'heroku';
  */
 export const apiVersion = optns => {
   // ensure options
-  const options = _.merge(
+  const options = merge(
     {},
     {
       version: '1.0.0',
@@ -348,19 +408,19 @@ export const apiVersion = optns => {
   const { version, prefix, minor, patch } = options;
 
   // parse api version
-  const parsedVersion = semver.coerce(getString('API_VERSION', version));
+  const parsedVersion = coerce(getString('API_VERSION', version));
 
   // prepare exposed api version
-  let apiVersion = parsedVersion.major;
+  let parsedApiVersion = parsedVersion.major;
 
   // allow minor
   if (minor) {
-    apiVersion = [parsedVersion.major, parsedVersion.minor].join('.');
+    parsedApiVersion = [parsedVersion.major, parsedVersion.minor].join('.');
   }
 
   // allow patch
   if (patch) {
-    apiVersion = [
+    parsedApiVersion = [
       parsedVersion.major,
       parsedVersion.minor,
       parsedVersion.patch,
@@ -368,6 +428,6 @@ export const apiVersion = optns => {
   }
 
   // return prefixed api version
-  apiVersion = `${prefix}${apiVersion}`;
-  return apiVersion;
+  parsedApiVersion = `${prefix}${parsedApiVersion}`;
+  return parsedApiVersion;
 };
