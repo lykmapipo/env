@@ -1,3 +1,17 @@
+#### 0.7.0 (2019-03-21)
+
+##### Chores
+
+*  build latest ([8a2695ba](https://github.com/lykmapipo/env/commit/8a2695babb11abec3a70abbde872f593f2ed25cd))
+*  ignore editor specific setup files ([7dc87305](https://github.com/lykmapipo/env/commit/7dc87305d7c8e14e8f160d0bcfe6c99368cc6175))
+*  install dependencies ([b3b925e9](https://github.com/lykmapipo/env/commit/b3b925e9f4fffe6a88a3387fea3e44704c611127))
+* **grunt:**  add prettier task to format code ([abe2061e](https://github.com/lykmapipo/env/commit/abe2061e26d8896cd9536395cb8fb45e09742bdf))
+
+##### Refactors
+
+*  migrate to isomorphic js library ([14004c64](https://github.com/lykmapipo/env/commit/14004c64a00bb9eb3b9ab9df0c88666c0dfb4ec2))
+*  add support both cjs and es modules ([d3cbf243](https://github.com/lykmapipo/env/commit/d3cbf243c3753573bd69831802b65cd81623fdb5))
+
 #### 0.6.1 (2019-03-14)
 
 ##### Refactors
