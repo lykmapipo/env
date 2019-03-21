@@ -1,5 +1,10 @@
 #### 0.7.1 (2019-03-21)
 
+##### Chores
+
+*  update commit hook config ([0092623a](https://github.com/lykmapipo/env/commit/0092623a3c20798f8c788f7b208aadaf61d4e69b))
+*  generate latest changelog ([c3fa24e9](https://github.com/lykmapipo/env/commit/c3fa24e92c8d9b18d42f543d765fd19734ee2fb3))
+
 ##### Bug Fixes
 
 *  enforce strict on cjs builds ([a247945b](https://github.com/lykmapipo/env/commit/a247945b04be24d4552d3b47520aed926bcc0dd3))
