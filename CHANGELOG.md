@@ -1,3 +1,9 @@
+#### 0.7.1 (2019-03-21)
+
+##### Bug Fixes
+
+*  enforce strict on cjs builds ([a247945b](https://github.com/lykmapipo/env/commit/a247945b04be24d4552d3b47520aed926bcc0dd3))
+
 #### 0.7.0 (2019-03-21)
 
 ##### Chores
