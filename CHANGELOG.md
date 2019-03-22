@@ -1,3 +1,9 @@
+#### 0.7.2 (2019-03-22)
+
+##### Documentation Changes
+
+*  update usage docs ([1b639b49](https://github.com/lykmapipo/env/commit/1b639b494a22b020b576f2b4fb2e936fe3bc4651))
+
 #### 0.7.1 (2019-03-21)
 
 ##### Chores
