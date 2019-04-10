@@ -1,3 +1,15 @@
+#### 0.7.3 (2019-04-10)
+
+##### Chores
+
+*  add documentation generator tasks ([487db6c1](https://github.com/lykmapipo/env/commit/487db6c1f281949b52094e0722a404dde0ab7f4d))
+*  force latest dependencies ([c763758e](https://github.com/lykmapipo/env/commit/c763758e6fb37e8cfb5499267930db5ec2f1233b))
+
+##### Documentation Changes
+
+*  generate latest documentation ([3a63c6c1](https://github.com/lykmapipo/env/commit/3a63c6c15015afda365988968dc87274e28d484d))
+*  add code of conduct and cotributing guide ([62aa79e3](https://github.com/lykmapipo/env/commit/62aa79e334152f60a8ff1cb6a4357f2960071597))
+
 #### 0.7.2 (2019-03-22)
 
 ##### Documentation Changes
