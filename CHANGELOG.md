@@ -1,3 +1,11 @@
+#### 0.7.5 (2019-05-08)
+
+##### Chores
+
+* **ci:**  add npm test script ([899ed1db](https://github.com/lykmapipo/env/commit/899ed1db4a37786afeea08701df3aaf9db3d055c))
+* **deps:**  force latest version & audit fix ([287a2adc](https://github.com/lykmapipo/env/commit/287a2adce4d7803778996528495c20acb27a2f09))
+* **.npmrc:**  prevent npm version to commit and tag version ([92986c58](https://github.com/lykmapipo/env/commit/92986c5817f1469414015b79f65e1a9e2a37e43d))
+
 #### 0.7.4 (2019-04-30)
 
 ##### Chores
