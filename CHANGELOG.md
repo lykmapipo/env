@@ -1,3 +1,9 @@
+#### 0.7.6 (2019-05-12)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([26551b7d](https://github.com/lykmapipo/env/commit/26551b7da5a17c4f0a8dfbb562ceb9fda93708b4))
+
 #### 0.7.5 (2019-05-08)
 
 ##### Chores
