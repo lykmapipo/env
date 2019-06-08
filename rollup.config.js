@@ -1,9 +1,14 @@
+import { keys } from 'lodash';
 import pkg from './package.json';
 
 export default [
   {
     input: 'src/index.js',
-    external: ['path', 'lodash', 'semver', 'dotenv'],
+    external: [
+      'path',
+      ...keys(pkg.dependencies),
+      ...keys(pkg.peerDependencies),
+    ],
     output: [
       {
         file: pkg.main,
