@@ -1,3 +1,10 @@
+#### 0.7.10 (2019-06-08)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([459841c9](https://github.com/lykmapipo/env/commit/459841c9a3c81c8b71c3183640721b667ff6db41))
+* **build:**  refactor rollup extrenal to include peerDependencies ([3e06c7a6](https://github.com/lykmapipo/env/commit/3e06c7a61e61e32cee39071df875f92e93158a58))
+
 #### 0.7.9 (2019-06-02)
 
 ##### Chores
