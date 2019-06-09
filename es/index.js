@@ -10,7 +10,7 @@ import { once, toNumber, toString, set as set$1, get as get$1, isEmpty, map, tri
  * @author lally elias <lallyelias87@mail.com>
  * @license MIT
  * @since 0.7.0
- * @version 0.1.0
+ * @version 0.2.0
  * @static
  * @public
  * @example
@@ -18,12 +18,10 @@ import { once, toNumber, toString, set as set$1, get as get$1, isEmpty, map, tri
  * const env = load();
  */
 const load = once(() => {
-  // ensure NODE_ENV
-  process.env.NODE_ENV = process.env.NODE_ENV || 'development';
   // ensure BASE_PATH
-  process.env.BASE_PATH = process.env.BASE_PATH || process.cwd();
+  const BASE_PATH = process.env.BASE_PATH || process.cwd();
   // load .env file
-  const path = resolve(process.env.BASE_PATH, '.env');
+  const path = resolve(BASE_PATH, '.env');
   return config({ path });
 });
 

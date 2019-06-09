@@ -23,7 +23,7 @@ import {
  * @author lally elias <lallyelias87@mail.com>
  * @license MIT
  * @since 0.7.0
- * @version 0.1.0
+ * @version 0.2.0
  * @static
  * @public
  * @example

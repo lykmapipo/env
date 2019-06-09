@@ -1,3 +1,15 @@
+#### 0.8.0 (2019-06-09)
+
+##### Chores
+
+* **deps:**
+  *  force latest version & audit fix ([e78ea5f2](https://github.com/lykmapipo/env/commit/e78ea5f25c22ab01e7fddf4cb8fc3c2fdf438ded))
+  *  fix securit alerts ([ffc64aaf](https://github.com/lykmapipo/env/commit/ffc64aaf1f4eec68557a63f6d0db13f2c58804c8))
+
+##### Refactors
+
+*  remove environment set on load env ([856705ec](https://github.com/lykmapipo/env/commit/856705ecc12974e6bc726450476311d0cfbf6122))
+
 #### 0.7.10 (2019-06-08)
 
 ##### Chores
