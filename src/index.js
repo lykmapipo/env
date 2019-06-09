@@ -31,12 +31,10 @@ import {
  * const env = load();
  */
 export const load = once(() => {
-  // ensure NODE_ENV
-  process.env.NODE_ENV = process.env.NODE_ENV || 'development';
   // ensure BASE_PATH
-  process.env.BASE_PATH = process.env.BASE_PATH || process.cwd();
+  const BASE_PATH = process.env.BASE_PATH || process.cwd();
   // load .env file
-  const path = resolve(process.env.BASE_PATH, '.env');
+  const path = resolve(BASE_PATH, '.env');
   return loadEnv({ path });
 });
 
