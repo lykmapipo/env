@@ -134,6 +134,38 @@ const BASE_PATH = get('BASE_PATH', process.cwd());
 
 
 
+#### clear(keys) 
+
+clear environment variables
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| keys | `String` `String`  | valid keys | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+const { clear } = require('@lykmapipo/env');
+clear('BASE_PATH');
+process.env.BASE_PATH //=> undefined
+```
+
+
+##### Returns
+
+
+- `Void`
+
+
+
 #### getArray(key[, defaultValue]) 
 
 get array value from environment variable
@@ -511,6 +543,54 @@ const version = apiVersion({ version: '2.0.0' }); //=> v2
 
 
 - `String`  parsed environment api version
+
+
+
+#### getLocale() 
+
+Obtain runtime locale
+
+
+
+
+
+
+##### Examples
+
+```javascript
+const { getLocale } = require('@lykmapipo/env');
+const locale = getLocale(); //=> sw
+```
+
+
+##### Returns
+
+
+- `String`  valid runtime locale
+
+
+
+#### getCountryCode() 
+
+Obtain runtime country code
+
+
+
+
+
+
+##### Examples
+
+```javascript
+const { getCountryCode } = require('@lykmapipo/env');
+const countryCode = getCountryCode(); //=> TZ
+```
+
+
+##### Returns
+
+
+- `String`  valid runtime country code
 
 
 

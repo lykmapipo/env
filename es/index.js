@@ -1,13 +1,14 @@
 import { resolve } from 'path';
 import { coerce } from 'semver';
 import { config } from 'dotenv';
-import { once, toNumber, toString, set as set$1, get as get$1, isEmpty, map, trim, uniq, compact, toLower, merge } from 'lodash';
+import { sync } from 'os-locale';
+import { once, toNumber, toString, set as set$1, get as get$1, forEach, isEmpty, map, trim, uniq, compact, toLower, merge, size, last } from 'lodash';
 
 /**
  * @function load
  * @name load
  * @description load environment variables from .env file only once
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.7.0
  * @version 0.2.0
@@ -16,6 +17,7 @@ import { once, toNumber, toString, set as set$1, get as get$1, isEmpty, map, tri
  * @example
  * const { load } = require('@lykmapipo/env');
  * const env = load();
+ *
  */
 const load = once(() => {
   // ensure BASE_PATH
@@ -29,7 +31,7 @@ const load = once(() => {
  * @function mapToNumber
  * @name mapToNumber
  * @description convert provided value to number
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.7.0
  * @version 0.1.0
@@ -38,6 +40,7 @@ const load = once(() => {
  * @example
  * const { mapToNumber } = require('@lykmapipo/env');
  * const age = mapToNumber('3.2'); //=> 3.2
+ *
  */
 const mapToNumber = value => toNumber(value);
 
@@ -45,7 +48,7 @@ const mapToNumber = value => toNumber(value);
  * @function mapToString
  * @name mapToString
  * @description convert provided value to string
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.7.0
  * @version 0.1.0
@@ -54,6 +57,7 @@ const mapToNumber = value => toNumber(value);
  * @example
  * const { mapToString } = require('@lykmapipo/env');
  * const age = mapToString(3.2); //=> '3.2'
+ *
  */
 const mapToString = value => toString(value);
 
@@ -64,7 +68,7 @@ const mapToString = value => toString(value);
  * @param {String} key value key
  * @param {Mixed} [value] value to set on key
  * @return {Mixed} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -73,6 +77,7 @@ const mapToString = value => toString(value);
  * @example
  * const { set } = require('@lykmapipo/env');
  * const BASE_PATH = set('BASE_PATH', process.cwd());
+ *
  */
 const set = (key, value) => {
   set$1(process.env, key, value);
@@ -86,7 +91,7 @@ const set = (key, value) => {
  * @param {String} key value key
  * @param {Mixed} [defaultValue] value to return if key not exists
  * @return {Mixed} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -95,6 +100,7 @@ const set = (key, value) => {
  * @example
  * const { get } = require('@lykmapipo/env');
  * const BASE_PATH = get('BASE_PATH', process.cwd());
+ *
  */
 const get = (key, defaultValue) => {
   // ensure .env is loaded
@@ -105,13 +111,36 @@ const get = (key, defaultValue) => {
 };
 
 /**
+ * @function clear
+ * @name clear
+ * @description clear environment variables
+ * @param {String|...String} keys valid keys
+ * @author lally elias <lallyelias87@gmail.com>
+ * @license MIT
+ * @since 0.9.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { clear } = require('@lykmapipo/env');
+ * clear('BASE_PATH');
+ * process.env.BASE_PATH //=> undefined
+ *
+ */
+const clear = (...keys) => {
+  forEach([...keys], key => {
+    delete process.env[key];
+  });
+};
+
+/**
  * @function getArray
  * @name getArray
  * @description get array value from environment variable
  * @param {String} key value key
  * @param {Array} [defaultValue] value to return if key not exists
  * @return {Array} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -120,6 +149,7 @@ const get = (key, defaultValue) => {
  * @example
  * const { getArray } = require('@lykmapipo/env');
  * const categories = getArray('CATEGORIES'); //=> ['Fashion', 'Technology']
+ *
  */
 const getArray = (key, defaultValue) => {
   let value = [].concat(defaultValue);
@@ -138,7 +168,7 @@ const getArray = (key, defaultValue) => {
  * @param {String} key value key
  * @param {Number[]} [defaultValue] value to return if key not exists
  * @return {Number[]} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -147,6 +177,7 @@ const getArray = (key, defaultValue) => {
  * @example
  * const { getNumbers } = require('@lykmapipo/env');
  * const ages = getNumbers('AGES'); //=> [11, 18]
+ *
  */
 const getNumbers = (key, defaultValue) => {
   let numbers = getArray(key, defaultValue);
@@ -161,7 +192,7 @@ const getNumbers = (key, defaultValue) => {
  * @param {String} key value key
  * @param {Number} [defaultValue] value to return if key not exists
  * @return {Number} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -170,6 +201,7 @@ const getNumbers = (key, defaultValue) => {
  * @example
  * const { getNumber } = require('@lykmapipo/env');
  * const defaultAge = getNumber('DEFAULT_AGE'); //=> 11
+ *
  */
 const getNumber = (key, defaultValue) => {
   let value = get(key, defaultValue);
@@ -184,7 +216,7 @@ const getNumber = (key, defaultValue) => {
  * @param {String} key value key
  * @param {String} [defaultValue] value to return if key not exists
  * @return {String} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -193,6 +225,7 @@ const getNumber = (key, defaultValue) => {
  * @example
  * const { getString } = require('@lykmapipo/env');
  * const category = getString('DEFAULT_CATEGORY'); //=> 'Fashion'
+ *
  */
 const getString = function getString(key, defaultValue) {
   let value = get(key, defaultValue);
@@ -207,7 +240,7 @@ const getString = function getString(key, defaultValue) {
  * @param {String} key value key
  * @param {String[]} [defaultValue] value to return if key not exists
  * @return {String[]} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -216,6 +249,7 @@ const getString = function getString(key, defaultValue) {
  * @example
  * const { getStrings } = require('@lykmapipo/env');
  * const categories = getStrings('CATEGORIES'); //=> ['Fashion', 'Technology']
+ *
  */
 const getStrings = (key, defaultValue) => {
   let strings = getArray(key, defaultValue);
@@ -230,7 +264,7 @@ const getStrings = (key, defaultValue) => {
  * @param {String} key value key
  * @param {Boolean} [defaultValue] value to return if key not exists
  * @return {Boolean} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -239,6 +273,7 @@ const getStrings = (key, defaultValue) => {
  * @example
  * const { getBoolean } = require('@lykmapipo/env');
  * const debug = getBoolean('DEBUG'); //=> true
+ *
  */
 const getBoolean = (key, defaultValue) => {
   let value = get(key, defaultValue);
@@ -258,7 +293,7 @@ const getBoolean = (key, defaultValue) => {
  * @description check if node environment is same as given
  * @param {String} env value of env to test
  * @return {Boolean} true if its a tested node environment else false
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -267,6 +302,7 @@ const getBoolean = (key, defaultValue) => {
  * @example
  * const { is } = require('@lykmapipo/env');
  * const test = is('TEST'); //=> true
+ *
  */
 const is = env => toLower(get('NODE_ENV')) === toLower(env);
 
@@ -275,7 +311,7 @@ const is = env => toLower(get('NODE_ENV')) === toLower(env);
  * @name isTest
  * @description check if node environment is test
  * @return {Boolean} true if its a test node environment else false
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -284,6 +320,7 @@ const is = env => toLower(get('NODE_ENV')) === toLower(env);
  * @example
  * const { isTest } = require('@lykmapipo/env');
  * const test = isTest(); //=> true
+ *
  */
 const isTest = () => is('test');
 
@@ -292,7 +329,7 @@ const isTest = () => is('test');
  * @name isDevelopment
  * @description check if node environment is development
  * @return {Boolean} true if its a development node environment else false
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -301,6 +338,7 @@ const isTest = () => is('test');
  * @example
  * const { isDevelopment } = require('@lykmapipo/env');
  * const isDev = isDevelopment(); //=> true
+ *
  */
 const isDevelopment = () => is('development');
 
@@ -309,7 +347,7 @@ const isDevelopment = () => is('development');
  * @name isProduction
  * @description check if node environment is production
  * @return {Boolean} true if its a production node environment else false
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -318,6 +356,7 @@ const isDevelopment = () => is('development');
  * @example
  * const { isProduction } = require('@lykmapipo/env');
  * const isProd = isProduction(); //=> true
+ *
  */
 const isProduction = () => is('production');
 
@@ -326,7 +365,7 @@ const isProduction = () => is('production');
  * @name isLocal
  * @description check if node environment is development or test
  * @return {Boolean} true if its a development or test node environment else false
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -335,6 +374,7 @@ const isProduction = () => is('production');
  * @example
  * const { isLocal } = require('@lykmapipo/env');
  * const local = isLocal(); //=> true
+ *
  */
 const isLocal = () => isTest() || isDevelopment();
 
@@ -343,7 +383,7 @@ const isLocal = () => isTest() || isDevelopment();
  * @name isHeroku
  * @description check if runtime environment is heroku
  * @return {Boolean} true if its runtime environment is heroku else false
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -352,6 +392,7 @@ const isLocal = () => isTest() || isDevelopment();
  * @example
  * const { isHeroku } = require('@lykmapipo/env');
  * const heroku = isHeroku(); //=> true
+ *
  */
 const isHeroku = () => toLower(get('RUNTIME_ENV')) === 'heroku';
 
@@ -366,7 +407,7 @@ const isHeroku = () => toLower(get('RUNTIME_ENV')) === 'heroku';
  * @param {Boolean} [optns.minor=false] whether to allow minor part
  * @param {Boolean} [optns.patch=false] whether to allow patch part
  * @return {String} parsed environment api version
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -376,6 +417,7 @@ const isHeroku = () => toLower(get('RUNTIME_ENV')) === 'heroku';
  * const { apiVersion } = require('@lykmapipo/env');
  * const version = apiVersion(); //=> v1
  * const version = apiVersion({ version: '2.0.0' }); //=> v2
+ *
  */
 const apiVersion = optns => {
   // ensure options
@@ -417,4 +459,68 @@ const apiVersion = optns => {
   return parsedApiVersion;
 };
 
-export { apiVersion, get, getArray, getBoolean, getNumber, getNumbers, getString, getStrings, is, isDevelopment, isHeroku, isLocal, isProduction, isTest, load, mapToNumber, mapToString, set };
+/**
+ * @function getLocale
+ * @name getLocale
+ * @description Obtain runtime locale
+ * @return {String} valid runtime locale
+ * @author lally elias <lallyelias87@gmail.com>
+ * @license MIT
+ * @since 0.9.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { getLocale } = require('@lykmapipo/env');
+ * const locale = getLocale(); //=> sw
+ *
+ */
+const getLocale = (defaultLocale = 'sw') => {
+  // obtain os locale
+  let locale = sync() || sync({ spawn: false }) || defaultLocale;
+
+  // switch with environment locale
+  locale = getString('DEFAULT_LOCALE', locale);
+
+  // return derived locale
+  return locale;
+};
+
+/**
+ * @function getCountryCode
+ * @name getCountryCode
+ * @description Obtain runtime country code
+ * @return {String} valid runtime country code
+ * @author lally elias <lallyelias87@gmail.com>
+ * @license MIT
+ * @since 0.9.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { getCountryCode } = require('@lykmapipo/env');
+ * const countryCode = getCountryCode(); //=> TZ
+ *
+ */
+const getCountryCode = (defaultCountryCode = 'TZ') => {
+  // obtain runtime country code
+  let countryCode = defaultCountryCode;
+
+  // obtain from os locale parts
+  if (size(getLocale().split('_')) > 1) {
+    countryCode = last(getLocale().split('_'));
+  }
+
+  // obtain from os locale parts
+  if (size(getLocale().split('-')) > 1) {
+    countryCode = last(getLocale().split('-'));
+  }
+
+  // switch with environment country code
+  countryCode = getString('DEFAULT_COUNTRY_CODE', countryCode);
+
+  // return derived country code
+  return countryCode;
+};
+
+export { apiVersion, clear, get, getArray, getBoolean, getCountryCode, getLocale, getNumber, getNumbers, getString, getStrings, is, isDevelopment, isHeroku, isLocal, isProduction, isTest, load, mapToNumber, mapToString, set };
