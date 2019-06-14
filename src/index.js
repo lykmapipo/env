@@ -4,6 +4,7 @@ import { config as loadEnv } from 'dotenv';
 import { sync as osLocale } from 'os-locale';
 import {
   compact,
+  forEach,
   get as grab,
   isEmpty,
   last,
@@ -32,6 +33,7 @@ import {
  * @example
  * const { load } = require('@lykmapipo/env');
  * const env = load();
+ *
  */
 export const load = once(() => {
   // ensure BASE_PATH
@@ -54,6 +56,7 @@ export const load = once(() => {
  * @example
  * const { mapToNumber } = require('@lykmapipo/env');
  * const age = mapToNumber('3.2'); //=> 3.2
+ *
  */
 export const mapToNumber = value => toNumber(value);
 
@@ -70,6 +73,7 @@ export const mapToNumber = value => toNumber(value);
  * @example
  * const { mapToString } = require('@lykmapipo/env');
  * const age = mapToString(3.2); //=> '3.2'
+ *
  */
 export const mapToString = value => toString(value);
 
@@ -89,6 +93,7 @@ export const mapToString = value => toString(value);
  * @example
  * const { set } = require('@lykmapipo/env');
  * const BASE_PATH = set('BASE_PATH', process.cwd());
+ *
  */
 export const set = (key, value) => {
   define(process.env, key, value);
@@ -111,6 +116,7 @@ export const set = (key, value) => {
  * @example
  * const { get } = require('@lykmapipo/env');
  * const BASE_PATH = get('BASE_PATH', process.cwd());
+ *
  */
 export const get = (key, defaultValue) => {
   // ensure .env is loaded
@@ -118,6 +124,29 @@ export const get = (key, defaultValue) => {
   // get value
   const value = grab(process.env, key, defaultValue);
   return value;
+};
+
+/**
+ * @function clear
+ * @name clear
+ * @description clear environment variables
+ * @param {String|...String} keys valid keys
+ * @author lally elias <lallyelias87@gmail.com>
+ * @license MIT
+ * @since 0.9.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { clear } = require('@lykmapipo/env');
+ * clear('BASE_PATH');
+ * process.env.BASE_PATH //=> undefined
+ *
+ */
+export const clear = (...keys) => {
+  forEach([...keys], key => {
+    delete process.env[key];
+  });
 };
 
 /**
@@ -136,6 +165,7 @@ export const get = (key, defaultValue) => {
  * @example
  * const { getArray } = require('@lykmapipo/env');
  * const categories = getArray('CATEGORIES'); //=> ['Fashion', 'Technology']
+ *
  */
 export const getArray = (key, defaultValue) => {
   let value = [].concat(defaultValue);
@@ -163,6 +193,7 @@ export const getArray = (key, defaultValue) => {
  * @example
  * const { getNumbers } = require('@lykmapipo/env');
  * const ages = getNumbers('AGES'); //=> [11, 18]
+ *
  */
 export const getNumbers = (key, defaultValue) => {
   let numbers = getArray(key, defaultValue);
@@ -186,6 +217,7 @@ export const getNumbers = (key, defaultValue) => {
  * @example
  * const { getNumber } = require('@lykmapipo/env');
  * const defaultAge = getNumber('DEFAULT_AGE'); //=> 11
+ *
  */
 export const getNumber = (key, defaultValue) => {
   let value = get(key, defaultValue);
@@ -209,6 +241,7 @@ export const getNumber = (key, defaultValue) => {
  * @example
  * const { getString } = require('@lykmapipo/env');
  * const category = getString('DEFAULT_CATEGORY'); //=> 'Fashion'
+ *
  */
 export const getString = function getString(key, defaultValue) {
   let value = get(key, defaultValue);
@@ -232,6 +265,7 @@ export const getString = function getString(key, defaultValue) {
  * @example
  * const { getStrings } = require('@lykmapipo/env');
  * const categories = getStrings('CATEGORIES'); //=> ['Fashion', 'Technology']
+ *
  */
 export const getStrings = (key, defaultValue) => {
   let strings = getArray(key, defaultValue);
@@ -255,6 +289,7 @@ export const getStrings = (key, defaultValue) => {
  * @example
  * const { getBoolean } = require('@lykmapipo/env');
  * const debug = getBoolean('DEBUG'); //=> true
+ *
  */
 export const getBoolean = (key, defaultValue) => {
   let value = get(key, defaultValue);
@@ -283,6 +318,7 @@ export const getBoolean = (key, defaultValue) => {
  * @example
  * const { is } = require('@lykmapipo/env');
  * const test = is('TEST'); //=> true
+ *
  */
 export const is = env => toLower(get('NODE_ENV')) === toLower(env);
 
@@ -300,6 +336,7 @@ export const is = env => toLower(get('NODE_ENV')) === toLower(env);
  * @example
  * const { isTest } = require('@lykmapipo/env');
  * const test = isTest(); //=> true
+ *
  */
 export const isTest = () => is('test');
 
@@ -317,6 +354,7 @@ export const isTest = () => is('test');
  * @example
  * const { isDevelopment } = require('@lykmapipo/env');
  * const isDev = isDevelopment(); //=> true
+ *
  */
 export const isDevelopment = () => is('development');
 
@@ -334,6 +372,7 @@ export const isDevelopment = () => is('development');
  * @example
  * const { isProduction } = require('@lykmapipo/env');
  * const isProd = isProduction(); //=> true
+ *
  */
 export const isProduction = () => is('production');
 
@@ -351,6 +390,7 @@ export const isProduction = () => is('production');
  * @example
  * const { isLocal } = require('@lykmapipo/env');
  * const local = isLocal(); //=> true
+ *
  */
 export const isLocal = () => isTest() || isDevelopment();
 
@@ -368,6 +408,7 @@ export const isLocal = () => isTest() || isDevelopment();
  * @example
  * const { isHeroku } = require('@lykmapipo/env');
  * const heroku = isHeroku(); //=> true
+ *
  */
 export const isHeroku = () => toLower(get('RUNTIME_ENV')) === 'heroku';
 
@@ -392,6 +433,7 @@ export const isHeroku = () => toLower(get('RUNTIME_ENV')) === 'heroku';
  * const { apiVersion } = require('@lykmapipo/env');
  * const version = apiVersion(); //=> v1
  * const version = apiVersion({ version: '2.0.0' }); //=> v2
+ *
  */
 export const apiVersion = optns => {
   // ensure options
@@ -447,6 +489,7 @@ export const apiVersion = optns => {
  * @example
  * const { getLocale } = require('@lykmapipo/env');
  * const locale = getLocale(); //=> sw
+ *
  */
 export const getLocale = (defaultLocale = 'sw') => {
   // obtain os locale
@@ -473,6 +516,7 @@ export const getLocale = (defaultLocale = 'sw') => {
  * @example
  * const { getCountryCode } = require('@lykmapipo/env');
  * const countryCode = getCountryCode(); //=> TZ
+ *
  */
 export const getCountryCode = (defaultCountryCode = 'TZ') => {
   // obtain runtime country code

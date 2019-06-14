@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import {
   get,
   set,
+  clear,
   getNumber,
   getArray,
   getString,
@@ -48,6 +49,14 @@ describe('env', () => {
     const value = get('Any', 'Any');
     expect(value).to.exist;
     expect(value).to.be.equal('Any');
+  });
+
+  it('should be able to clear environment variables', () => {
+    process.env.ONE = 1;
+    process.env.TWO = 1;
+    clear('ONE', 'TWO');
+    expect(process.env.ONE).to.not.exist;
+    expect(process.env.TWO).to.not.exist;
   });
 
   it('should be able to get string value', () => {
