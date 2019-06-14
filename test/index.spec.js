@@ -1,8 +1,5 @@
-/* dependencies */
 import path from 'path';
 import { expect } from 'chai';
-
-/* declarations */
 import {
   get,
   set,
@@ -20,6 +17,7 @@ import {
   isHeroku,
   apiVersion,
   getLocale,
+  getCountryCode,
 } from '../src/index';
 
 // set env
@@ -195,10 +193,31 @@ describe('env', () => {
   });
 
   it('should be able to compute locale from env', () => {
-    const previousLocale = process.env.DEFAULT_LOCALE;
-    process.env.DEFAULT_LOCALE = 'en';
+    const envLocale = process.env.DEFAULT_LOCALE;
+    process.env.DEFAULT_LOCALE = 'sw';
     const locale = getLocale();
-    expect(locale).to.exist.and.be.equal('en');
-    process.env.DEFAULT_LOCALE = previousLocale;
+    expect(locale).to.exist.and.be.equal('sw');
+    process.env.DEFAULT_LOCALE = envLocale;
+  });
+
+  it('should be able to compute country code from os', () => {
+    const countryCode = getCountryCode();
+    expect(countryCode).to.exist;
+  });
+
+  it('should be able to compute country code from os', () => {
+    const envCountryCode = process.env.DEFAULT_COUNTRY_CODE;
+    delete process.env.DEFAULT_COUNTRY_CODE;
+    const countryCode = getCountryCode();
+    expect(countryCode).to.exist;
+    process.env.DEFAULT_COUNTRY_CODE = envCountryCode;
+  });
+
+  it('should be able to compute country code from env', () => {
+    const envCountryCode = process.env.DEFAULT_COUNTRY_CODE;
+    process.env.DEFAULT_COUNTRY_CODE = 'TZ';
+    const countryCode = getCountryCode();
+    expect(countryCode).to.exist.and.be.equal('TZ');
+    process.env.DEFAULT_COUNTRY_CODE = envCountryCode;
   });
 });

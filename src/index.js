@@ -6,6 +6,7 @@ import {
   compact,
   get as grab,
   isEmpty,
+  last,
   map,
   merge,
   once,
@@ -15,6 +16,7 @@ import {
   toString,
   trim,
   uniq,
+  size as sizeOf,
 } from 'lodash';
 
 /**
@@ -444,9 +446,9 @@ export const apiVersion = optns => {
  * @public
  * @example
  * const { getLocale } = require('@lykmapipo/env');
- * const locale = getLocale(); //=> en-US
+ * const locale = getLocale(); //=> sw
  */
-export const getLocale = (defaultLocale = 'en') => {
+export const getLocale = (defaultLocale = 'sw') => {
   // obtain os locale
   let locale = osLocale() || osLocale({ spawn: false }) || defaultLocale;
 
@@ -455,4 +457,40 @@ export const getLocale = (defaultLocale = 'en') => {
 
   // return derived locale
   return locale;
+};
+
+/**
+ * @function getCountryCode
+ * @name getCountryCode
+ * @description Obtain runtime country code
+ * @return {String} valid runtime country code
+ * @author lally elias <lallyelias87@gmail.com>
+ * @license MIT
+ * @since 0.9.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { getCountryCode } = require('@lykmapipo/env');
+ * const countryCode = getCountryCode(); //=> TZ
+ */
+export const getCountryCode = (defaultCountryCode = 'TZ') => {
+  // obtain runtime country code
+  let countryCode = defaultCountryCode;
+
+  // obtain from os locale parts
+  if (sizeOf(getLocale().split('_')) > 1) {
+    countryCode = last(getLocale().split('_'));
+  }
+
+  // obtain from os locale parts
+  if (sizeOf(getLocale().split('-')) > 1) {
+    countryCode = last(getLocale().split('-'));
+  }
+
+  // switch with environment country code
+  countryCode = getString('DEFAULT_COUNTRY_CODE', countryCode);
+
+  // return derived country code
+  return countryCode;
 };
