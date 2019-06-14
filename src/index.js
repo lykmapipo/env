@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import { coerce } from 'semver';
 import { config as loadEnv } from 'dotenv';
+import { sync as osLocale } from 'os-locale';
 import {
   compact,
   get as grab,
@@ -20,7 +21,7 @@ import {
  * @function load
  * @name load
  * @description load environment variables from .env file only once
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.7.0
  * @version 0.2.0
@@ -42,7 +43,7 @@ export const load = once(() => {
  * @function mapToNumber
  * @name mapToNumber
  * @description convert provided value to number
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.7.0
  * @version 0.1.0
@@ -58,7 +59,7 @@ export const mapToNumber = value => toNumber(value);
  * @function mapToString
  * @name mapToString
  * @description convert provided value to string
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.7.0
  * @version 0.1.0
@@ -77,7 +78,7 @@ export const mapToString = value => toString(value);
  * @param {String} key value key
  * @param {Mixed} [value] value to set on key
  * @return {Mixed} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -99,7 +100,7 @@ export const set = (key, value) => {
  * @param {String} key value key
  * @param {Mixed} [defaultValue] value to return if key not exists
  * @return {Mixed} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -124,7 +125,7 @@ export const get = (key, defaultValue) => {
  * @param {String} key value key
  * @param {Array} [defaultValue] value to return if key not exists
  * @return {Array} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -151,7 +152,7 @@ export const getArray = (key, defaultValue) => {
  * @param {String} key value key
  * @param {Number[]} [defaultValue] value to return if key not exists
  * @return {Number[]} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -174,7 +175,7 @@ export const getNumbers = (key, defaultValue) => {
  * @param {String} key value key
  * @param {Number} [defaultValue] value to return if key not exists
  * @return {Number} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -197,7 +198,7 @@ export const getNumber = (key, defaultValue) => {
  * @param {String} key value key
  * @param {String} [defaultValue] value to return if key not exists
  * @return {String} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -220,7 +221,7 @@ export const getString = function getString(key, defaultValue) {
  * @param {String} key value key
  * @param {String[]} [defaultValue] value to return if key not exists
  * @return {String[]} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -243,7 +244,7 @@ export const getStrings = (key, defaultValue) => {
  * @param {String} key value key
  * @param {Boolean} [defaultValue] value to return if key not exists
  * @return {Boolean} environment value
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -271,7 +272,7 @@ export const getBoolean = (key, defaultValue) => {
  * @description check if node environment is same as given
  * @param {String} env value of env to test
  * @return {Boolean} true if its a tested node environment else false
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -288,7 +289,7 @@ export const is = env => toLower(get('NODE_ENV')) === toLower(env);
  * @name isTest
  * @description check if node environment is test
  * @return {Boolean} true if its a test node environment else false
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -305,7 +306,7 @@ export const isTest = () => is('test');
  * @name isDevelopment
  * @description check if node environment is development
  * @return {Boolean} true if its a development node environment else false
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -322,7 +323,7 @@ export const isDevelopment = () => is('development');
  * @name isProduction
  * @description check if node environment is production
  * @return {Boolean} true if its a production node environment else false
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -339,7 +340,7 @@ export const isProduction = () => is('production');
  * @name isLocal
  * @description check if node environment is development or test
  * @return {Boolean} true if its a development or test node environment else false
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -356,7 +357,7 @@ export const isLocal = () => isTest() || isDevelopment();
  * @name isHeroku
  * @description check if runtime environment is heroku
  * @return {Boolean} true if its runtime environment is heroku else false
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -379,7 +380,7 @@ export const isHeroku = () => toLower(get('RUNTIME_ENV')) === 'heroku';
  * @param {Boolean} [optns.minor=false] whether to allow minor part
  * @param {Boolean} [optns.patch=false] whether to allow patch part
  * @return {String} parsed environment api version
- * @author lally elias <lallyelias87@mail.com>
+ * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
  * @version 0.1.0
@@ -428,4 +429,30 @@ export const apiVersion = optns => {
   // return prefixed api version
   parsedApiVersion = `${prefix}${parsedApiVersion}`;
   return parsedApiVersion;
+};
+
+/**
+ * @function getLocale
+ * @name getLocale
+ * @description Obtain runtime locale
+ * @return {String} valid runtime locale
+ * @author lally elias <lallyelias87@gmail.com>
+ * @license MIT
+ * @since 0.9.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { getLocale } = require('@lykmapipo/env');
+ * const locale = getLocale(); //=> en-US
+ */
+export const getLocale = (defaultLocale = 'en') => {
+  // obtain os locale
+  let locale = osLocale() || osLocale({ spawn: false }) || defaultLocale;
+
+  // switch with environment locale
+  locale = getString('DEFAULT_LOCALE', locale);
+
+  // return derived locale
+  return locale;
 };

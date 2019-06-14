@@ -19,6 +19,7 @@ import {
   isLocal,
   isHeroku,
   apiVersion,
+  getLocale,
 } from '../src/index';
 
 // set env
@@ -186,5 +187,18 @@ describe('env', () => {
     expect(apiVersion({ minor: true })).to.be.equal('v1.0');
     expect(apiVersion({ patch: true })).to.be.equal('v1.0.0');
     expect(apiVersion({ version: 2 })).to.be.equal('v2');
+  });
+
+  it('should be able to compute locale from os', () => {
+    const locale = getLocale();
+    expect(locale).to.exist;
+  });
+
+  it('should be able to compute locale from env', () => {
+    const previousLocale = process.env.DEFAULT_LOCALE;
+    process.env.DEFAULT_LOCALE = 'en';
+    const locale = getLocale();
+    expect(locale).to.exist.and.be.equal('en');
+    process.env.DEFAULT_LOCALE = previousLocale;
   });
 });
