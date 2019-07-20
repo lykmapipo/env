@@ -10,6 +10,7 @@ import {
   getStrings,
   getNumbers,
   getBoolean,
+  getObject,
   is,
   isTest,
   isProduction,
@@ -127,6 +128,20 @@ describe('env', () => {
     expect(value).to.exist;
     expect(value).to.be.an('array');
     expect(value).to.be.eql([14, 15, 16]);
+  });
+
+  it('should be able to get plain object', () => {
+    let value = getObject('OBJECT');
+    expect(value).to.exist;
+    expect(value).to.be.an('object');
+    expect(value).to.be.eql({
+      lead: { ref: 'Person', autopopulate: { select: { name: 1 } } },
+    });
+
+    value = getObject('OBJECT_NOT_EXIST');
+    expect(value).to.exist;
+    expect(value).to.be.an('object');
+    expect(value).to.be.eql({});
   });
 
   it('should be able to get base path', () => {

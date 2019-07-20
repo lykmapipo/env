@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import { coerce } from 'semver';
 import { config as loadEnv } from 'dotenv';
 import { sync as osLocale } from 'os-locale';
+import { autoParse } from '@lykmapipo/common';
 import {
   compact,
   forEach,
@@ -300,6 +301,30 @@ export const getBoolean = (key, defaultValue) => {
     value = true;
   }
   value = value ? Boolean(value) : value;
+  return value;
+};
+
+/**
+ * @function getObject
+ * @name getObject
+ * @description get plain object value from environment variable
+ * @param {String} key value key
+ * @param {Object} [defaultValue={}] value to return if key not exists
+ * @return {Object} environment value
+ * @author lally elias <lallyelias87@gmail.com>
+ * @license MIT
+ * @since 0.10.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { getObject } = require('@lykmapipo/env');
+ * const debug = getObject('OBJECT'); //=> { lead: { ref: 'Person' } ... }
+ *
+ */
+export const getObject = (key, defaultValue = {}) => {
+  let value = get(key, defaultValue);
+  value = value ? autoParse(value) : value;
   return value;
 };
 
