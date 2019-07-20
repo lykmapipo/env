@@ -1,3 +1,13 @@
+#### 0.10.0 (2019-07-20)
+
+##### New Features
+
+*  add getObject helper ([18324331](https://github.com/lykmapipo/env/commit/18324331ae495f113f099f5faf9cf8d75e6c3fb6))
+
+##### Code Style Changes
+
+*  improve getObject jsdocs ([b971dde4](https://github.com/lykmapipo/env/commit/b971dde4222c91c28550bdb1f60b92d51786c3a5))
+
 #### 0.9.7 (2019-07-20)
 
 #### 0.9.6 (2019-07-20)

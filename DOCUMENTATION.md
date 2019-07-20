@@ -358,6 +358,44 @@ const debug = getBoolean('DEBUG'); //=> true
 
 
 
+#### getObject(key[, defaultValue&#x3D;{}]) 
+
+get plain object value from environment variable
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| key | `String`  | value key | &nbsp; |
+| defaultValue&#x3D;{} | `Object`  | value to return if key not exists | *Optional* |
+
+
+
+
+##### Examples
+
+```javascript
+
+const { getObject } = require('@lykmapipo/env');
+
+const object = getObject('OBJECT');
+// => { lead: { ref: 'Person' } ... }
+
+const object = getObject('OBJECT_NOT_EXIST');
+// => {}
+```
+
+
+##### Returns
+
+
+- `Object`  environment value
+
+
+
 #### is(env) 
 
 check if node environment is same as given

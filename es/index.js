@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import { coerce } from 'semver';
 import { config } from 'dotenv';
 import { sync } from 'os-locale';
+import { autoParse } from '@lykmapipo/common';
 import { once, toNumber, toString, set as set$1, get as get$1, forEach, isEmpty, map, trim, uniq, compact, toLower, merge, size, last } from 'lodash';
 
 /**
@@ -288,6 +289,36 @@ const getBoolean = (key, defaultValue) => {
 };
 
 /**
+ * @function getObject
+ * @name getObject
+ * @description get plain object value from environment variable
+ * @param {String} key value key
+ * @param {Object} [defaultValue={}] value to return if key not exists
+ * @return {Object} environment value
+ * @author lally elias <lallyelias87@gmail.com>
+ * @license MIT
+ * @since 0.10.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ *
+ * const { getObject } = require('@lykmapipo/env');
+ *
+ * const object = getObject('OBJECT');
+ * // => { lead: { ref: 'Person' } ... }
+ *
+ * const object = getObject('OBJECT_NOT_EXIST');
+ * // => {}
+ *
+ */
+const getObject = (key, defaultValue = {}) => {
+  let value = get(key, defaultValue);
+  value = value ? autoParse(value) : value;
+  return value;
+};
+
+/**
  * @function is
  * @name is
  * @description check if node environment is same as given
@@ -523,4 +554,4 @@ const getCountryCode = (defaultCountryCode = 'TZ') => {
   return countryCode;
 };
 
-export { apiVersion, clear, get, getArray, getBoolean, getCountryCode, getLocale, getNumber, getNumbers, getString, getStrings, is, isDevelopment, isHeroku, isLocal, isProduction, isTest, load, mapToNumber, mapToString, set };
+export { apiVersion, clear, get, getArray, getBoolean, getCountryCode, getLocale, getNumber, getNumbers, getObject, getString, getStrings, is, isDevelopment, isHeroku, isLocal, isProduction, isTest, load, mapToNumber, mapToString, set };
