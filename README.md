@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/lykmapipo/env.svg?branch=master)](https://travis-ci.org/lykmapipo/env)
 [![Dependencies Status](https://david-dm.org/lykmapipo/env.svg?style=flat-square)](https://david-dm.org/lykmapipo/env)
+[![Coverage Status](https://coveralls.io/repos/github/lykmapipo/env/badge.svg?branch=master)](https://coveralls.io/github/lykmapipo/env?branch=master)
 
 Helper utilities for accessing environment variables
 
