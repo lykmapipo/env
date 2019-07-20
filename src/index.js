@@ -318,8 +318,14 @@ export const getBoolean = (key, defaultValue) => {
  * @static
  * @public
  * @example
+ *
  * const { getObject } = require('@lykmapipo/env');
- * const debug = getObject('OBJECT'); //=> { lead: { ref: 'Person' } ... }
+ *
+ * const object = getObject('OBJECT');
+ * // => { lead: { ref: 'Person' } ... }
+ *
+ * const object = getObject('OBJECT_NOT_EXIST');
+ * // => {}
  *
  */
 export const getObject = (key, defaultValue = {}) => {
