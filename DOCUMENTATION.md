@@ -315,7 +315,41 @@ get array of strings from environment variable
 
 ```javascript
 const { getStrings } = require('@lykmapipo/env');
-const categories = getStrings('CATEGORIES'); //=> ['Fashion', 'Technology']
+const categories = getStrings('CATEGORIES');
+//=> ['Fashion', 'Technology']
+```
+
+
+##### Returns
+
+
+- `Array.&lt;String&gt;`  environment value
+
+
+
+#### getStringSet(key[, defaultValue]) 
+
+get array of unique sorted strings from environment variable
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| key | `String`  | value key | &nbsp; |
+| defaultValue | `Array.<String>`  | value to return if key not exists | *Optional* |
+
+
+
+
+##### Examples
+
+```javascript
+const { getStringSet } = require('@lykmapipo/env');
+const categories = getStringSet('CATEGORIES');
+//=> ['Fashion', 'Technology']
 ```
 
 

@@ -1,3 +1,9 @@
+#### 0.11.0 (2019-07-21)
+
+##### New Features
+
+*  allow get unique sorted string ([1590b031](https://github.com/lykmapipo/env/commit/1590b03119fc6f699d9eb5ddbb3d3397e5e6d280))
+
 #### 0.10.0 (2019-07-20)
 
 ##### New Features
