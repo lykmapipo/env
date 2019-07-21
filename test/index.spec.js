@@ -8,6 +8,7 @@ import {
   getArray,
   getString,
   getStrings,
+  getStringSet,
   getNumbers,
   getBoolean,
   getObject,
@@ -31,6 +32,7 @@ process.env.DEFAULT_CITY = 'Dar es salaam';
 process.env.DEFAULT_AGE = 14;
 process.env.ALLOWED_AGES = '14,15, 16';
 process.env.CONTENT_TYPES = 'FAQ,Tariff';
+process.env.CATEGORIES = 'A,B,B,C';
 
 describe('env', () => {
   it('should be able to get raw value', () => {
@@ -128,6 +130,13 @@ describe('env', () => {
     expect(value).to.exist;
     expect(value).to.be.an('array');
     expect(value).to.be.eql([14, 15, 16]);
+  });
+
+  it('should be able to get array of unique strings', () => {
+    const value = getStringSet('CATEGORIES');
+    expect(value).to.exist;
+    expect(value).to.be.an('array');
+    expect(value).to.be.eql(['A', 'B', 'C']);
   });
 
   it('should be able to get plain object', () => {

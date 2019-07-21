@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import { coerce } from 'semver';
 import { config as loadEnv } from 'dotenv';
 import { sync as osLocale } from 'os-locale';
-import { autoParse } from '@lykmapipo/common';
+import { autoParse, sortedUniq } from '@lykmapipo/common';
 import {
   compact,
   forEach,
@@ -265,12 +265,38 @@ export const getString = function getString(key, defaultValue) {
  * @public
  * @example
  * const { getStrings } = require('@lykmapipo/env');
- * const categories = getStrings('CATEGORIES'); //=> ['Fashion', 'Technology']
+ * const categories = getStrings('CATEGORIES');
+ * //=> ['Fashion', 'Technology']
  *
  */
 export const getStrings = (key, defaultValue) => {
   let strings = getArray(key, defaultValue);
   strings = map(strings, mapToString);
+  return strings;
+};
+
+/**
+ * @function getStringSet
+ * @name getStringSet
+ * @description get array of unique sorted strings from environment variable
+ * @param {String} key value key
+ * @param {String[]} [defaultValue] value to return if key not exists
+ * @return {String[]} environment value
+ * @author lally elias <lallyelias87@gmail.com>
+ * @license MIT
+ * @since 0.11.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ * const { getStringSet } = require('@lykmapipo/env');
+ * const categories = getStringSet('CATEGORIES');
+ * //=> ['Fashion', 'Technology']
+ *
+ */
+export const getStringSet = (key, defaultValue) => {
+  let strings = getStrings(key, defaultValue);
+  strings = sortedUniq(strings);
   return strings;
 };
 
@@ -411,7 +437,8 @@ export const isProduction = () => is('production');
  * @function isLocal
  * @name isLocal
  * @description check if node environment is development or test
- * @return {Boolean} true if its a development or test node environment else false
+ * @return {Boolean} true if its a development or test node environment
+ * else false
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
