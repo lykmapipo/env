@@ -1,6 +1,6 @@
 #### load() 
 
-load environment variables from .env file only once
+Load environment variables from .env file only once
 
 
 
@@ -22,11 +22,18 @@ const env = load();
 
 
 
-#### mapToNumber() 
+#### mapToNumber(value) 
 
-convert provided value to number
+Convert provided value to number
 
 
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| value |  | valid value | &nbsp; |
 
 
 
@@ -42,15 +49,22 @@ const age = mapToNumber('3.2'); //=> 3.2
 ##### Returns
 
 
-- `Void`
+- `number`  value as number
 
 
 
-#### mapToString() 
+#### mapToString(value) 
 
-convert provided value to string
+Convert provided value to string
 
 
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| value |  | valid value | &nbsp; |
 
 
 
@@ -66,13 +80,13 @@ const age = mapToString(3.2); //=> '3.2'
 ##### Returns
 
 
-- `Void`
+- `string`  value as string
 
 
 
 #### set(key[, value]) 
 
-set environment variable
+Set environment variable
 
 
 
@@ -81,8 +95,8 @@ set environment variable
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| key | `String`  | value key | &nbsp; |
-| value | `Mixed`  | value to set on key | *Optional* |
+| key | `string`  | value key | &nbsp; |
+| value |  | value to set on key | *Optional* |
 
 
 
@@ -98,13 +112,13 @@ const BASE_PATH = set('BASE_PATH', process.cwd());
 ##### Returns
 
 
-- `Mixed`  environment value
+-  environment value
 
 
 
 #### get(key[, defaultValue]) 
 
-get environment variable
+Get environment variable
 
 
 
@@ -113,8 +127,8 @@ get environment variable
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| key | `String`  | value key | &nbsp; |
-| defaultValue | `Mixed`  | value to return if key not exists | *Optional* |
+| key | `string`  | value key | &nbsp; |
+| defaultValue |  | value to return if key not exists | *Optional* |
 
 
 
@@ -130,13 +144,13 @@ const BASE_PATH = get('BASE_PATH', process.cwd());
 ##### Returns
 
 
-- `Mixed`  environment value
+-  environment value
 
 
 
 #### clear(keys) 
 
-clear environment variables
+Clear environment variables
 
 
 
@@ -145,7 +159,7 @@ clear environment variables
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| keys | `String` `String`  | valid keys | &nbsp; |
+| keys | `string`  | valid keys | &nbsp; |
 
 
 
@@ -168,7 +182,7 @@ process.env.BASE_PATH //=> undefined
 
 #### getArray(key[, defaultValue]) 
 
-get array value from environment variable
+Get array value from environment variable
 
 
 
@@ -177,7 +191,7 @@ get array value from environment variable
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| key | `String`  | value key | &nbsp; |
+| key | `string`  | value key | &nbsp; |
 | defaultValue | `Array`  | value to return if key not exists | *Optional* |
 
 
@@ -200,7 +214,7 @@ const categories = getArray('CATEGORIES'); //=> ['Fashion', 'Technology']
 
 #### getNumbers(key[, defaultValue]) 
 
-get array of numbers from environment variable
+Get array of numbers from environment variable
 
 
 
@@ -209,8 +223,8 @@ get array of numbers from environment variable
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| key | `String`  | value key | &nbsp; |
-| defaultValue | `Array.<Number>`  | value to return if key not exists | *Optional* |
+| key | `string`  | value key | &nbsp; |
+| defaultValue | `Array.<number>`  | value to return if key not exists | *Optional* |
 
 
 
@@ -226,13 +240,13 @@ const ages = getNumbers('AGES'); //=> [11, 18]
 ##### Returns
 
 
-- `Array.&lt;Number&gt;`  environment value
+- `Array.&lt;number&gt;`  environment value
 
 
 
 #### getNumber(key[, defaultValue]) 
 
-get number value from environment variable
+Get number value from environment variable
 
 
 
@@ -241,8 +255,8 @@ get number value from environment variable
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| key | `String`  | value key | &nbsp; |
-| defaultValue | `Number`  | value to return if key not exists | *Optional* |
+| key | `string`  | value key | &nbsp; |
+| defaultValue | `number`  | value to return if key not exists | *Optional* |
 
 
 
@@ -258,13 +272,13 @@ const defaultAge = getNumber('DEFAULT_AGE'); //=> 11
 ##### Returns
 
 
-- `Number`  environment value
+- `number`  environment value
 
 
 
 #### getString(key[, defaultValue]) 
 
-get string value from environment variable
+Get string value from environment variable
 
 
 
@@ -273,8 +287,8 @@ get string value from environment variable
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| key | `String`  | value key | &nbsp; |
-| defaultValue | `String`  | value to return if key not exists | *Optional* |
+| key | `string`  | value key | &nbsp; |
+| defaultValue | `string`  | value to return if key not exists | *Optional* |
 
 
 
@@ -290,13 +304,13 @@ const category = getString('DEFAULT_CATEGORY'); //=> 'Fashion'
 ##### Returns
 
 
-- `String`  environment value
+- `string`  environment value
 
 
 
 #### getStrings(key[, defaultValue]) 
 
-get array of strings from environment variable
+Get array of strings from environment variable
 
 
 
@@ -305,8 +319,8 @@ get array of strings from environment variable
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| key | `String`  | value key | &nbsp; |
-| defaultValue | `Array.<String>`  | value to return if key not exists | *Optional* |
+| key | `string`  | value key | &nbsp; |
+| defaultValue | `Array.<string>`  | value to return if key not exists | *Optional* |
 
 
 
@@ -323,13 +337,13 @@ const categories = getStrings('CATEGORIES');
 ##### Returns
 
 
-- `Array.&lt;String&gt;`  environment value
+- `Array.&lt;string&gt;`  environment value
 
 
 
 #### getStringSet(key[, defaultValue]) 
 
-get array of unique sorted strings from environment variable
+Get array of unique sorted strings from environment variable
 
 
 
@@ -338,8 +352,8 @@ get array of unique sorted strings from environment variable
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| key | `String`  | value key | &nbsp; |
-| defaultValue | `Array.<String>`  | value to return if key not exists | *Optional* |
+| key | `string`  | value key | &nbsp; |
+| defaultValue | `Array.<string>`  | value to return if key not exists | *Optional* |
 
 
 
@@ -356,13 +370,13 @@ const categories = getStringSet('CATEGORIES');
 ##### Returns
 
 
-- `Array.&lt;String&gt;`  environment value
+- `Array.&lt;string&gt;`  environment value
 
 
 
 #### getBoolean(key[, defaultValue]) 
 
-get boolean value from environment variable
+Get boolean value from environment variable
 
 
 
@@ -371,8 +385,8 @@ get boolean value from environment variable
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| key | `String`  | value key | &nbsp; |
-| defaultValue | `Boolean`  | value to return if key not exists | *Optional* |
+| key | `string`  | value key | &nbsp; |
+| defaultValue | `boolean`  | value to return if key not exists | *Optional* |
 
 
 
@@ -388,13 +402,13 @@ const debug = getBoolean('DEBUG'); //=> true
 ##### Returns
 
 
-- `Boolean`  environment value
+- `boolean`  environment value
 
 
 
 #### getObject(key[, defaultValue&#x3D;{}]) 
 
-get plain object value from environment variable
+Get plain object value from environment variable
 
 
 
@@ -403,8 +417,8 @@ get plain object value from environment variable
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| key | `String`  | value key | &nbsp; |
-| defaultValue&#x3D;{} | `Object`  | value to return if key not exists | *Optional* |
+| key | `string`  | value key | &nbsp; |
+| defaultValue&#x3D;{} | `object`  | value to return if key not exists | *Optional* |
 
 
 
@@ -426,13 +440,13 @@ const object = getObject('OBJECT_NOT_EXIST');
 ##### Returns
 
 
-- `Object`  environment value
+- `object`  environment value
 
 
 
 #### is(env) 
 
-check if node environment is same as given
+Check if node environment is same as given
 
 
 
@@ -441,7 +455,7 @@ check if node environment is same as given
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| env | `String`  | value of env to test | &nbsp; |
+| env | `string`  | value of env to test | &nbsp; |
 
 
 
@@ -457,13 +471,13 @@ const test = is('TEST'); //=> true
 ##### Returns
 
 
-- `Boolean`  true if its a tested node environment else false
+- `boolean`  true if its a tested node environment else false
 
 
 
 #### isTest() 
 
-check if node environment is test
+Check if node environment is test
 
 
 
@@ -481,13 +495,13 @@ const test = isTest(); //=> true
 ##### Returns
 
 
-- `Boolean`  true if its a test node environment else false
+- `boolean`  true if its a test node environment else false
 
 
 
 #### isDevelopment() 
 
-check if node environment is development
+Check if node environment is development
 
 
 
@@ -505,13 +519,13 @@ const isDev = isDevelopment(); //=> true
 ##### Returns
 
 
-- `Boolean`  true if its a development node environment else false
+- `boolean`  true if its a development node environment else false
 
 
 
 #### isProduction() 
 
-check if node environment is production
+Check if node environment is production
 
 
 
@@ -529,13 +543,13 @@ const isProd = isProduction(); //=> true
 ##### Returns
 
 
-- `Boolean`  true if its a production node environment else false
+- `boolean`  true if its a production node environment else false
 
 
 
 #### isLocal() 
 
-check if node environment is development or test
+Check if node environment is development or test
 
 
 
@@ -553,13 +567,13 @@ const local = isLocal(); //=> true
 ##### Returns
 
 
-- `Boolean`  true if its a development or test node environment else false
+- `boolean`  true if its a development or test node environment else false
 
 
 
 #### isHeroku() 
 
-check if runtime environment is heroku
+Check if runtime environment is heroku
 
 
 
@@ -577,13 +591,13 @@ const heroku = isHeroku(); //=> true
 ##### Returns
 
 
-- `Boolean`  true if its runtime environment is heroku else false
+- `boolean`  true if its runtime environment is heroku else false
 
 
 
 #### apiVersion([optns]) 
 
-parse api version from environment variable
+Parse api version from environment variable
 
 
 
@@ -592,12 +606,12 @@ parse api version from environment variable
 
 | Name | Type | Description |  |
 | ---- | ---- | ----------- | -------- |
-| optns | `Object`  |  | *Optional* |
-| optns.version&#x3D;1.0.0 | `String`  | value to use to parse api version | *Optional* |
-| optns.prefix&#x3D;v | `String`  | prefix to set on parsed api version | *Optional* |
-| optns.major&#x3D;true | `Boolean`  | whether to allow major part | *Optional* |
-| optns.minor&#x3D;false | `Boolean`  | whether to allow minor part | *Optional* |
-| optns.patch&#x3D;false | `Boolean`  | whether to allow patch part | *Optional* |
+| optns | `object`  | valid options | *Optional* |
+| optns.version&#x3D;1.0.0 | `string`  | value to use to parse api version | *Optional* |
+| optns.prefix&#x3D;v | `string`  | prefix to set on parsed api version | *Optional* |
+| optns.major&#x3D;true | `boolean`  | whether to allow major part | *Optional* |
+| optns.minor&#x3D;false | `boolean`  | whether to allow minor part | *Optional* |
+| optns.patch&#x3D;false | `boolean`  | whether to allow patch part | *Optional* |
 
 
 
@@ -614,15 +628,22 @@ const version = apiVersion({ version: '2.0.0' }); //=> v2
 ##### Returns
 
 
-- `String`  parsed environment api version
+- `string`  parsed environment api version
 
 
 
-#### getLocale() 
+#### getLocale([defaultLocale&#x3D;&#x27;sw&#x27;]) 
 
 Obtain runtime locale
 
 
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| defaultLocale&#x3D;&#x27;sw&#x27; | `string`  | valid default locale | *Optional* |
 
 
 
@@ -638,15 +659,22 @@ const locale = getLocale(); //=> sw
 ##### Returns
 
 
-- `String`  valid runtime locale
+- `string`  valid runtime locale
 
 
 
-#### getCountryCode() 
+#### getCountryCode([defaultCountryCode&#x3D;&#x27;TZ&#x27;]) 
 
 Obtain runtime country code
 
 
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| defaultCountryCode&#x3D;&#x27;TZ&#x27; | `string`  | valid default country code | *Optional* |
 
 
 
@@ -662,7 +690,7 @@ const countryCode = getCountryCode(); //=> TZ
 ##### Returns
 
 
-- `String`  valid runtime country code
+- `string`  valid runtime country code
 
 
 

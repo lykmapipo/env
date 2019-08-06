@@ -1,3 +1,18 @@
+#### 0.12.0 (2019-08-06)
+
+##### Chores
+
+* **deps:**
+  *  force latest version & audit fix ([8f1c40e8](https://github.com/lykmapipo/env/commit/8f1c40e89bc3c98fbae3b4ff8664e7abaff7c78a))
+  *  force latest version & audit fix ([93387682](https://github.com/lykmapipo/env/commit/93387682fa3111363b5a0175c850f84583db377d))
+  *  add test coverage deps ([3791d311](https://github.com/lykmapipo/env/commit/3791d311fa4a5306afdd6b0bb917b88a30c41e95))
+* **config:**  update eslint config ([bec234d6](https://github.com/lykmapipo/env/commit/bec234d67e174eae1c9e5a1d27c647aa3c260730))
+
+##### Code Style Changes
+
+*  ensure description jsdoc start with uppercase ([d805cb78](https://github.com/lykmapipo/env/commit/d805cb780beba102b6d55c8cf9e5649f0b13cd20))
+*  fix jsdoc lint rules ([6fcd0ede](https://github.com/lykmapipo/env/commit/6fcd0edea5703f0f9429055983d644012c1e74c8))
+
 #### 0.11.1 (2019-07-26)
 
 ##### Chores
