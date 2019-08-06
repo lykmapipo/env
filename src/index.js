@@ -48,6 +48,8 @@ export const load = once(() => {
  * @function mapToNumber
  * @name mapToNumber
  * @description convert provided value to number
+ * @param {*} value valid value
+ * @returns {number} value as number
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.7.0
@@ -65,6 +67,8 @@ export const mapToNumber = value => toNumber(value);
  * @function mapToString
  * @name mapToString
  * @description convert provided value to string
+ * @param {*} value valid value
+ * @returns {string} value as string
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.7.0
@@ -82,9 +86,9 @@ export const mapToString = value => toString(value);
  * @function set
  * @name set
  * @description set environment variable
- * @param {String} key value key
- * @param {Mixed} [value] value to set on key
- * @return {Mixed} environment value
+ * @param {string} key value key
+ * @param {*} [value] value to set on key
+ * @returns {*} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -105,9 +109,9 @@ export const set = (key, value) => {
  * @function get
  * @name get
  * @description get environment variable
- * @param {String} key value key
- * @param {Mixed} [defaultValue] value to return if key not exists
- * @return {Mixed} environment value
+ * @param {string} key value key
+ * @param {*} [defaultValue] value to return if key not exists
+ * @returns {*} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -131,7 +135,7 @@ export const get = (key, defaultValue) => {
  * @function clear
  * @name clear
  * @description clear environment variables
- * @param {String|...String} keys valid keys
+ * @param {...string} keys valid keys
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.9.0
@@ -154,9 +158,9 @@ export const clear = (...keys) => {
  * @function getArray
  * @name getArray
  * @description get array value from environment variable
- * @param {String} key value key
+ * @param {string} key value key
  * @param {Array} [defaultValue] value to return if key not exists
- * @return {Array} environment value
+ * @returns {Array} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -182,9 +186,9 @@ export const getArray = (key, defaultValue) => {
  * @function getNumbers
  * @name getNumbers
  * @description get array of numbers from environment variable
- * @param {String} key value key
- * @param {Number[]} [defaultValue] value to return if key not exists
- * @return {Number[]} environment value
+ * @param {string} key value key
+ * @param {number[]} [defaultValue] value to return if key not exists
+ * @returns {number[]} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -206,9 +210,9 @@ export const getNumbers = (key, defaultValue) => {
  * @function getNumber
  * @name getNumber
  * @description get number value from environment variable
- * @param {String} key value key
- * @param {Number} [defaultValue] value to return if key not exists
- * @return {Number} environment value
+ * @param {string} key value key
+ * @param {number} [defaultValue] value to return if key not exists
+ * @returns {number} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -230,9 +234,9 @@ export const getNumber = (key, defaultValue) => {
  * @function getString
  * @name getString
  * @description get string value from environment variable
- * @param {String} key value key
- * @param {String} [defaultValue] value to return if key not exists
- * @return {String} environment value
+ * @param {string} key value key
+ * @param {string} [defaultValue] value to return if key not exists
+ * @returns {string} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -254,9 +258,9 @@ export const getString = function getString(key, defaultValue) {
  * @function getStrings
  * @name getStrings
  * @description get array of strings from environment variable
- * @param {String} key value key
- * @param {String[]} [defaultValue] value to return if key not exists
- * @return {String[]} environment value
+ * @param {string} key value key
+ * @param {string[]} [defaultValue] value to return if key not exists
+ * @returns {string[]} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -279,9 +283,9 @@ export const getStrings = (key, defaultValue) => {
  * @function getStringSet
  * @name getStringSet
  * @description get array of unique sorted strings from environment variable
- * @param {String} key value key
- * @param {String[]} [defaultValue] value to return if key not exists
- * @return {String[]} environment value
+ * @param {string} key value key
+ * @param {string[]} [defaultValue] value to return if key not exists
+ * @returns {string[]} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.11.0
@@ -304,9 +308,9 @@ export const getStringSet = (key, defaultValue) => {
  * @function getBoolean
  * @name getBoolean
  * @description get boolean value from environment variable
- * @param {String} key value key
- * @param {Boolean} [defaultValue] value to return if key not exists
- * @return {Boolean} environment value
+ * @param {string} key value key
+ * @param {boolean} [defaultValue] value to return if key not exists
+ * @returns {boolean} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -334,9 +338,9 @@ export const getBoolean = (key, defaultValue) => {
  * @function getObject
  * @name getObject
  * @description get plain object value from environment variable
- * @param {String} key value key
- * @param {Object} [defaultValue={}] value to return if key not exists
- * @return {Object} environment value
+ * @param {string} key value key
+ * @param {object} [defaultValue={}] value to return if key not exists
+ * @returns {object} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.10.0
@@ -364,8 +368,8 @@ export const getObject = (key, defaultValue = {}) => {
  * @function is
  * @name is
  * @description check if node environment is same as given
- * @param {String} env value of env to test
- * @return {Boolean} true if its a tested node environment else false
+ * @param {string} env value of env to test
+ * @returns {boolean} true if its a tested node environment else false
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -383,7 +387,7 @@ export const is = env => toLower(get('NODE_ENV')) === toLower(env);
  * @function isTest
  * @name isTest
  * @description check if node environment is test
- * @return {Boolean} true if its a test node environment else false
+ * @returns {boolean} true if its a test node environment else false
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -401,7 +405,7 @@ export const isTest = () => is('test');
  * @function isDevelopment
  * @name isDevelopment
  * @description check if node environment is development
- * @return {Boolean} true if its a development node environment else false
+ * @returns {boolean} true if its a development node environment else false
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -419,7 +423,7 @@ export const isDevelopment = () => is('development');
  * @function isProduction
  * @name isProduction
  * @description check if node environment is production
- * @return {Boolean} true if its a production node environment else false
+ * @returns {boolean} true if its a production node environment else false
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -437,7 +441,7 @@ export const isProduction = () => is('production');
  * @function isLocal
  * @name isLocal
  * @description check if node environment is development or test
- * @return {Boolean} true if its a development or test node environment
+ * @returns {boolean} true if its a development or test node environment
  * else false
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
@@ -456,7 +460,7 @@ export const isLocal = () => isTest() || isDevelopment();
  * @function isHeroku
  * @name isHeroku
  * @description check if runtime environment is heroku
- * @return {Boolean} true if its runtime environment is heroku else false
+ * @returns {boolean} true if its runtime environment is heroku else false
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -474,13 +478,13 @@ export const isHeroku = () => toLower(get('RUNTIME_ENV')) === 'heroku';
  * @function apiVersion
  * @name apiVersion
  * @description parse api version from environment variable
- * @param {Object} [optns]
- * @param {String} [optns.version=1.0.0] value to use to parse api version
- * @param {String} [optns.prefix=v] prefix to set on parsed api version
- * @param {Boolean} [optns.major=true] whether to allow major part
- * @param {Boolean} [optns.minor=false] whether to allow minor part
- * @param {Boolean} [optns.patch=false] whether to allow patch part
- * @return {String} parsed environment api version
+ * @param {object} [optns] valid options
+ * @param {string} [optns.version=1.0.0] value to use to parse api version
+ * @param {string} [optns.prefix=v] prefix to set on parsed api version
+ * @param {boolean} [optns.major=true] whether to allow major part
+ * @param {boolean} [optns.minor=false] whether to allow minor part
+ * @param {boolean} [optns.patch=false] whether to allow patch part
+ * @returns {string} parsed environment api version
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
@@ -537,7 +541,8 @@ export const apiVersion = optns => {
  * @function getLocale
  * @name getLocale
  * @description Obtain runtime locale
- * @return {String} valid runtime locale
+ * @param {string} [defaultLocale='sw'] valid default locale
+ * @returns {string} valid runtime locale
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.9.0
@@ -564,7 +569,8 @@ export const getLocale = (defaultLocale = 'sw') => {
  * @function getCountryCode
  * @name getCountryCode
  * @description Obtain runtime country code
- * @return {String} valid runtime country code
+ * @param {string} [defaultCountryCode='TZ'] valid default country code
+ * @returns {string} valid runtime country code
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.9.0
