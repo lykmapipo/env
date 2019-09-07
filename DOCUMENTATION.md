@@ -10,7 +10,8 @@ Load environment variables from .env file only once
 ##### Examples
 
 ```javascript
-const { load } = require('@lykmapipo/env');
+
+import { load } from '@lykmapipo/env';
 const env = load();
 ```
 
@@ -41,8 +42,10 @@ Convert provided value to number
 ##### Examples
 
 ```javascript
-const { mapToNumber } = require('@lykmapipo/env');
-const age = mapToNumber('3.2'); //=> 3.2
+
+import { mapToNumber } from '@lykmapipo/env';
+const age = mapToNumber('3.2');
+// => 3.2
 ```
 
 
@@ -72,8 +75,10 @@ Convert provided value to string
 ##### Examples
 
 ```javascript
-const { mapToString } = require('@lykmapipo/env');
-const age = mapToString(3.2); //=> '3.2'
+
+import { mapToString } from '@lykmapipo/env';
+const age = mapToString(3.2);
+// => '3.2'
 ```
 
 
@@ -104,7 +109,8 @@ Set environment variable
 ##### Examples
 
 ```javascript
-const { set } = require('@lykmapipo/env');
+
+import { set } from '@lykmapipo/env';
 const BASE_PATH = set('BASE_PATH', process.cwd());
 ```
 
@@ -136,7 +142,8 @@ Get environment variable
 ##### Examples
 
 ```javascript
-const { get } = require('@lykmapipo/env');
+
+import { get } from '@lykmapipo/env';
 const BASE_PATH = get('BASE_PATH', process.cwd());
 ```
 
@@ -167,9 +174,11 @@ Clear environment variables
 ##### Examples
 
 ```javascript
-const { clear } = require('@lykmapipo/env');
+
+import { clear } from '@lykmapipo/env';
 clear('BASE_PATH');
-process.env.BASE_PATH //=> undefined
+process.env.BASE_PATH;
+// => undefined
 ```
 
 
@@ -200,8 +209,10 @@ Get array value from environment variable
 ##### Examples
 
 ```javascript
-const { getArray } = require('@lykmapipo/env');
-const categories = getArray('CATEGORIES'); //=> ['Fashion', 'Technology']
+
+import { getArray } from '@lykmapipo/env';
+const categories = getArray('CATEGORIES');
+// => ['Fashion', 'Technology']
 ```
 
 
@@ -232,8 +243,10 @@ Get array of numbers from environment variable
 ##### Examples
 
 ```javascript
-const { getNumbers } = require('@lykmapipo/env');
-const ages = getNumbers('AGES'); //=> [11, 18]
+
+import { getNumbers } from '@lykmapipo/env';
+const ages = getNumbers('AGES');
+// => [11, 18]
 ```
 
 
@@ -264,8 +277,10 @@ Get number value from environment variable
 ##### Examples
 
 ```javascript
-const { getNumber } = require('@lykmapipo/env');
-const defaultAge = getNumber('DEFAULT_AGE'); //=> 11
+
+import { getNumber } from '@lykmapipo/env';
+const defaultAge = getNumber('DEFAULT_AGE');
+// => 11
 ```
 
 
@@ -296,8 +311,10 @@ Get string value from environment variable
 ##### Examples
 
 ```javascript
-const { getString } = require('@lykmapipo/env');
-const category = getString('DEFAULT_CATEGORY'); //=> 'Fashion'
+
+import { getString } from '@lykmapipo/env';
+const category = getString('DEFAULT_CATEGORY');
+// => 'Fashion'
 ```
 
 
@@ -328,9 +345,10 @@ Get array of strings from environment variable
 ##### Examples
 
 ```javascript
-const { getStrings } = require('@lykmapipo/env');
+
+import { getStrings } from '@lykmapipo/env';
 const categories = getStrings('CATEGORIES');
-//=> ['Fashion', 'Technology']
+// => ['Fashion', 'Technology']
 ```
 
 
@@ -361,9 +379,10 @@ Get array of unique sorted strings from environment variable
 ##### Examples
 
 ```javascript
-const { getStringSet } = require('@lykmapipo/env');
+
+import { getStringSet } from '@lykmapipo/env';
 const categories = getStringSet('CATEGORIES');
-//=> ['Fashion', 'Technology']
+// => ['Fashion', 'Technology']
 ```
 
 
@@ -394,8 +413,10 @@ Get boolean value from environment variable
 ##### Examples
 
 ```javascript
-const { getBoolean } = require('@lykmapipo/env');
-const debug = getBoolean('DEBUG'); //=> true
+
+import { getBoolean } from '@lykmapipo/env';
+const debug = getBoolean('DEBUG');
+// => true
 ```
 
 
@@ -427,7 +448,7 @@ Get plain object value from environment variable
 
 ```javascript
 
-const { getObject } = require('@lykmapipo/env');
+import { getObject } from '@lykmapipo/env';
 
 const object = getObject('OBJECT');
 // => { lead: { ref: 'Person' } ... }
@@ -463,8 +484,10 @@ Check if node environment is same as given
 ##### Examples
 
 ```javascript
-const { is } = require('@lykmapipo/env');
-const test = is('TEST'); //=> true
+
+import { is } from '@lykmapipo/env';
+const test = is('TEST');
+// => true
 ```
 
 
@@ -487,8 +510,10 @@ Check if node environment is test
 ##### Examples
 
 ```javascript
-const { isTest } = require('@lykmapipo/env');
-const test = isTest(); //=> true
+
+import { isTest } from '@lykmapipo/env';
+const test = isTest();
+// => true
 ```
 
 
@@ -511,8 +536,10 @@ Check if node environment is development
 ##### Examples
 
 ```javascript
-const { isDevelopment } = require('@lykmapipo/env');
-const isDev = isDevelopment(); //=> true
+
+import { isDevelopment } from '@lykmapipo/env';
+const isDev = isDevelopment();
+// => true
 ```
 
 
@@ -535,8 +562,10 @@ Check if node environment is production
 ##### Examples
 
 ```javascript
-const { isProduction } = require('@lykmapipo/env');
-const isProd = isProduction(); //=> true
+
+import { isProduction } from '@lykmapipo/env';
+const isProd = isProduction();
+// => true
 ```
 
 
@@ -559,8 +588,10 @@ Check if node environment is development or test
 ##### Examples
 
 ```javascript
-const { isLocal } = require('@lykmapipo/env');
-const local = isLocal(); //=> true
+
+import { isLocal } from '@lykmapipo/env';
+const local = isLocal();
+// => true
 ```
 
 
@@ -583,8 +614,10 @@ Check if runtime environment is heroku
 ##### Examples
 
 ```javascript
-const { isHeroku } = require('@lykmapipo/env');
-const heroku = isHeroku(); //=> true
+
+import { isHeroku } from '@lykmapipo/env';
+const heroku = isHeroku();
+// => true
 ```
 
 
@@ -619,9 +652,10 @@ Parse api version from environment variable
 ##### Examples
 
 ```javascript
-const { apiVersion } = require('@lykmapipo/env');
-const version = apiVersion(); //=> v1
-const version = apiVersion({ version: '2.0.0' }); //=> v2
+
+import { apiVersion } from '@lykmapipo/env';
+const version = apiVersion(); // => v1
+const version = apiVersion({ version: '2.0.0' }); // => v2
 ```
 
 
@@ -651,8 +685,10 @@ Obtain runtime locale
 ##### Examples
 
 ```javascript
-const { getLocale } = require('@lykmapipo/env');
-const locale = getLocale(); //=> sw
+
+import { getLocale } from '@lykmapipo/env';
+const locale = getLocale();
+// => sw
 ```
 
 
@@ -682,8 +718,10 @@ Obtain runtime country code
 ##### Examples
 
 ```javascript
-const { getCountryCode } = require('@lykmapipo/env');
-const countryCode = getCountryCode(); //=> TZ
+
+import { getCountryCode } from '@lykmapipo/env';
+const countryCode = getCountryCode();
+// => TZ
 ```
 
 
