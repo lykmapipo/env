@@ -32,9 +32,9 @@ import {
  * @static
  * @public
  * @example
- * const { load } = require('@lykmapipo/env');
- * const env = load();
  *
+ * import { load } from '@lykmapipo/env';
+ * const env = load();
  */
 export const load = once(() => {
   // ensure BASE_PATH
@@ -57,9 +57,10 @@ export const load = once(() => {
  * @static
  * @public
  * @example
- * const { mapToNumber } = require('@lykmapipo/env');
- * const age = mapToNumber('3.2'); //=> 3.2
  *
+ * import { mapToNumber } from '@lykmapipo/env';
+ * const age = mapToNumber('3.2');
+ * // => 3.2
  */
 export const mapToNumber = value => toNumber(value);
 
@@ -76,9 +77,10 @@ export const mapToNumber = value => toNumber(value);
  * @static
  * @public
  * @example
- * const { mapToString } = require('@lykmapipo/env');
- * const age = mapToString(3.2); //=> '3.2'
  *
+ * import { mapToString } from '@lykmapipo/env';
+ * const age = mapToString(3.2);
+ * // => '3.2'
  */
 export const mapToString = value => toString(value);
 
@@ -96,9 +98,9 @@ export const mapToString = value => toString(value);
  * @static
  * @public
  * @example
- * const { set } = require('@lykmapipo/env');
- * const BASE_PATH = set('BASE_PATH', process.cwd());
  *
+ * import { set } from '@lykmapipo/env';
+ * const BASE_PATH = set('BASE_PATH', process.cwd());
  */
 export const set = (key, value) => {
   define(process.env, key, value);
@@ -119,9 +121,9 @@ export const set = (key, value) => {
  * @static
  * @public
  * @example
- * const { get } = require('@lykmapipo/env');
- * const BASE_PATH = get('BASE_PATH', process.cwd());
  *
+ * import { get } from '@lykmapipo/env';
+ * const BASE_PATH = get('BASE_PATH', process.cwd());
  */
 export const get = (key, defaultValue) => {
   // ensure .env is loaded
@@ -143,10 +145,11 @@ export const get = (key, defaultValue) => {
  * @static
  * @public
  * @example
- * const { clear } = require('@lykmapipo/env');
- * clear('BASE_PATH');
- * process.env.BASE_PATH //=> undefined
  *
+ * import { clear } from '@lykmapipo/env';
+ * clear('BASE_PATH');
+ * process.env.BASE_PATH;
+ * // => undefined
  */
 export const clear = (...keys) => {
   forEach([...keys], key => {
@@ -168,9 +171,10 @@ export const clear = (...keys) => {
  * @static
  * @public
  * @example
- * const { getArray } = require('@lykmapipo/env');
- * const categories = getArray('CATEGORIES'); //=> ['Fashion', 'Technology']
  *
+ * import { getArray } from '@lykmapipo/env';
+ * const categories = getArray('CATEGORIES');
+ * // => ['Fashion', 'Technology']
  */
 export const getArray = (key, defaultValue) => {
   let value = [].concat(defaultValue);
@@ -196,9 +200,10 @@ export const getArray = (key, defaultValue) => {
  * @static
  * @public
  * @example
- * const { getNumbers } = require('@lykmapipo/env');
- * const ages = getNumbers('AGES'); //=> [11, 18]
  *
+ * import { getNumbers } from '@lykmapipo/env';
+ * const ages = getNumbers('AGES');
+ * // => [11, 18]
  */
 export const getNumbers = (key, defaultValue) => {
   let numbers = getArray(key, defaultValue);
@@ -220,9 +225,10 @@ export const getNumbers = (key, defaultValue) => {
  * @static
  * @public
  * @example
- * const { getNumber } = require('@lykmapipo/env');
- * const defaultAge = getNumber('DEFAULT_AGE'); //=> 11
  *
+ * import { getNumber } from '@lykmapipo/env';
+ * const defaultAge = getNumber('DEFAULT_AGE');
+ * // => 11
  */
 export const getNumber = (key, defaultValue) => {
   let value = get(key, defaultValue);
@@ -244,9 +250,10 @@ export const getNumber = (key, defaultValue) => {
  * @static
  * @public
  * @example
- * const { getString } = require('@lykmapipo/env');
- * const category = getString('DEFAULT_CATEGORY'); //=> 'Fashion'
  *
+ * import { getString } from '@lykmapipo/env';
+ * const category = getString('DEFAULT_CATEGORY');
+ * // => 'Fashion'
  */
 export const getString = function getString(key, defaultValue) {
   let value = get(key, defaultValue);
@@ -268,10 +275,10 @@ export const getString = function getString(key, defaultValue) {
  * @static
  * @public
  * @example
- * const { getStrings } = require('@lykmapipo/env');
- * const categories = getStrings('CATEGORIES');
- * //=> ['Fashion', 'Technology']
  *
+ * import { getStrings } from '@lykmapipo/env';
+ * const categories = getStrings('CATEGORIES');
+ * // => ['Fashion', 'Technology']
  */
 export const getStrings = (key, defaultValue) => {
   let strings = getArray(key, defaultValue);
@@ -293,10 +300,10 @@ export const getStrings = (key, defaultValue) => {
  * @static
  * @public
  * @example
- * const { getStringSet } = require('@lykmapipo/env');
- * const categories = getStringSet('CATEGORIES');
- * //=> ['Fashion', 'Technology']
  *
+ * import { getStringSet } from '@lykmapipo/env';
+ * const categories = getStringSet('CATEGORIES');
+ * // => ['Fashion', 'Technology']
  */
 export const getStringSet = (key, defaultValue) => {
   let strings = getStrings(key, defaultValue);
@@ -318,9 +325,10 @@ export const getStringSet = (key, defaultValue) => {
  * @static
  * @public
  * @example
- * const { getBoolean } = require('@lykmapipo/env');
- * const debug = getBoolean('DEBUG'); //=> true
  *
+ * import { getBoolean } from '@lykmapipo/env';
+ * const debug = getBoolean('DEBUG');
+ * // => true
  */
 export const getBoolean = (key, defaultValue) => {
   let value = get(key, defaultValue);
@@ -349,14 +357,13 @@ export const getBoolean = (key, defaultValue) => {
  * @public
  * @example
  *
- * const { getObject } = require('@lykmapipo/env');
+ * import { getObject } from '@lykmapipo/env';
  *
  * const object = getObject('OBJECT');
  * // => { lead: { ref: 'Person' } ... }
  *
  * const object = getObject('OBJECT_NOT_EXIST');
  * // => {}
- *
  */
 export const getObject = (key, defaultValue = {}) => {
   let value = get(key, defaultValue);
@@ -377,9 +384,10 @@ export const getObject = (key, defaultValue = {}) => {
  * @static
  * @public
  * @example
- * const { is } = require('@lykmapipo/env');
- * const test = is('TEST'); //=> true
  *
+ * import { is } from '@lykmapipo/env';
+ * const test = is('TEST');
+ * // => true
  */
 export const is = env => toLower(get('NODE_ENV')) === toLower(env);
 
@@ -395,9 +403,10 @@ export const is = env => toLower(get('NODE_ENV')) === toLower(env);
  * @static
  * @public
  * @example
- * const { isTest } = require('@lykmapipo/env');
- * const test = isTest(); //=> true
  *
+ * import { isTest } from '@lykmapipo/env';
+ * const test = isTest();
+ * // => true
  */
 export const isTest = () => is('test');
 
@@ -413,9 +422,10 @@ export const isTest = () => is('test');
  * @static
  * @public
  * @example
- * const { isDevelopment } = require('@lykmapipo/env');
- * const isDev = isDevelopment(); //=> true
  *
+ * import { isDevelopment } from '@lykmapipo/env';
+ * const isDev = isDevelopment();
+ * // => true
  */
 export const isDevelopment = () => is('development');
 
@@ -431,9 +441,10 @@ export const isDevelopment = () => is('development');
  * @static
  * @public
  * @example
- * const { isProduction } = require('@lykmapipo/env');
- * const isProd = isProduction(); //=> true
  *
+ * import { isProduction } from '@lykmapipo/env';
+ * const isProd = isProduction();
+ * // => true
  */
 export const isProduction = () => is('production');
 
@@ -450,9 +461,10 @@ export const isProduction = () => is('production');
  * @static
  * @public
  * @example
- * const { isLocal } = require('@lykmapipo/env');
- * const local = isLocal(); //=> true
  *
+ * import { isLocal } from '@lykmapipo/env';
+ * const local = isLocal();
+ * // => true
  */
 export const isLocal = () => isTest() || isDevelopment();
 
@@ -468,9 +480,10 @@ export const isLocal = () => isTest() || isDevelopment();
  * @static
  * @public
  * @example
- * const { isHeroku } = require('@lykmapipo/env');
- * const heroku = isHeroku(); //=> true
  *
+ * import { isHeroku } from '@lykmapipo/env';
+ * const heroku = isHeroku();
+ * // => true
  */
 export const isHeroku = () => toLower(get('RUNTIME_ENV')) === 'heroku';
 
@@ -492,10 +505,10 @@ export const isHeroku = () => toLower(get('RUNTIME_ENV')) === 'heroku';
  * @static
  * @public
  * @example
- * const { apiVersion } = require('@lykmapipo/env');
- * const version = apiVersion(); //=> v1
- * const version = apiVersion({ version: '2.0.0' }); //=> v2
  *
+ * import { apiVersion } from '@lykmapipo/env';
+ * const version = apiVersion(); // => v1
+ * const version = apiVersion({ version: '2.0.0' }); // => v2
  */
 export const apiVersion = optns => {
   // ensure options
@@ -550,9 +563,10 @@ export const apiVersion = optns => {
  * @static
  * @public
  * @example
- * const { getLocale } = require('@lykmapipo/env');
- * const locale = getLocale(); //=> sw
  *
+ * import { getLocale } from '@lykmapipo/env';
+ * const locale = getLocale();
+ * // => sw
  */
 export const getLocale = (defaultLocale = 'sw') => {
   // obtain os locale
@@ -578,9 +592,10 @@ export const getLocale = (defaultLocale = 'sw') => {
  * @static
  * @public
  * @example
- * const { getCountryCode } = require('@lykmapipo/env');
- * const countryCode = getCountryCode(); //=> TZ
  *
+ * import { getCountryCode } from '@lykmapipo/env';
+ * const countryCode = getCountryCode();
+ * // => TZ
  */
 export const getCountryCode = (defaultCountryCode = 'TZ') => {
   // obtain runtime country code
