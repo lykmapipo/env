@@ -20,39 +20,13 @@ npm install --save @lykmapipo/env
 ```
 
 ## Usage
-
-- With Node.js:
-
-```js
-const {
-  getString,
-  getNumber,
-  getStrings,
-  getNumbers,
-  apiVersion
-} = require('@lykmapipo/env');
-
-const LOCALE = get('LOCALE', 'en');
-const LOCALE = getString('LOCALE', 'en');
-const LOCALES = getStrings('LOCALES', ['en']);
-
-const PORT = getNumber('PORT', 9000);
-const PORTS = getNumbers('PORTS', [3000, 9000, 8080]);
-
-const DEBUG = getBoolean('DEBUG', false);
-
-const version = apiVersion(); //=> v1
-```
-
-- With ES Module:
-
 ```js
 import {
   getString,
   getNumber,
   getStrings,
   getNumbers,
-  apiVersion
+  apiVersion,
 } from '@lykmapipo/env';
 
 const LOCALE = get('LOCALE', 'en');
