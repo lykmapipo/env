@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import { coerce } from 'semver';
 import { config } from 'dotenv';
+import expandEnv from 'dotenv-expand';
 import { sync } from 'os-locale';
 import { sortedUniq, autoParse } from '@lykmapipo/common';
 import { once, toNumber, toString, set as set$1, get as get$1, forEach, isEmpty, map, trim, uniq, compact, toLower, merge, size, last } from 'lodash';
@@ -25,7 +26,7 @@ const load = once(() => {
   const BASE_PATH = process.env.BASE_PATH || process.cwd();
   // load .env file
   const path = resolve(BASE_PATH, '.env');
-  return config({ path });
+  return expandEnv(config({ path }));
 });
 
 /**

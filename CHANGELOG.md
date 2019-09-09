@@ -1,3 +1,13 @@
+#### 0.13.0 (2019-09-09)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([1763e3f8](https://github.com/lykmapipo/env/commit/1763e3f80e5c49d00ce8721bea8de626a901f666))
+
+##### New Features
+
+*  add support for expanded variables ([c298a082](https://github.com/lykmapipo/env/commit/c298a082715f766256ef13e630b559e499b50a2c))
+
 #### 0.12.5 (2019-09-07)
 
 ##### Chores
