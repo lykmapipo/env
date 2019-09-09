@@ -62,6 +62,20 @@ describe('env', () => {
     expect(process.env.TWO).to.not.exist;
   });
 
+  it('should be able to get simple expanded variable', () => {
+    const expanded = getNumber('PORT_EXPANDED');
+    expect(expanded).to.exist;
+    expect(expanded).to.be.a('number');
+    expect(expanded).to.be.equal(5000);
+  });
+
+  it('should be able to get join expanded variable', () => {
+    const expanded = getString('SOCKET');
+    expect(expanded).to.exist;
+    expect(expanded).to.be.a('string');
+    expect(expanded).to.be.equal('127.0.0.1:5000');
+  });
+
   it('should be able to get string value', () => {
     const value = getString('DEFAULT_COUNTRY_CODE');
     expect(value).to.exist;

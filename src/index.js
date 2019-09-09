@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import { coerce } from 'semver';
 import { config as loadEnv } from 'dotenv';
+import expandEnv from 'dotenv-expand';
 import { sync as osLocale } from 'os-locale';
 import { autoParse, sortedUniq } from '@lykmapipo/common';
 import {
@@ -41,7 +42,7 @@ export const load = once(() => {
   const BASE_PATH = process.env.BASE_PATH || process.cwd();
   // load .env file
   const path = resolve(BASE_PATH, '.env');
-  return loadEnv({ path });
+  return expandEnv(loadEnv({ path }));
 });
 
 /**
