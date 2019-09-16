@@ -81,11 +81,11 @@
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
-    "rollup": "^1.21.3",
+    "rollup": "^1.21.4",
     "shelljs": "^0.8.3"
   },
   "dependencies": {
-    "@lykmapipo/common": ">=0.26.2",
+    "@lykmapipo/common": ">=0.26.3",
     "dotenv": ">=8.1.0",
     "dotenv-expand": ">=5.1.0",
     "lodash": ">=4.17.15",
