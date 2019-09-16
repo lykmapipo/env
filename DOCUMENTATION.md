@@ -732,5 +732,38 @@ const countryCode = getCountryCode();
 
 
 
+#### rcFor(moduleName) 
+
+Load runtime configuration of a given module
+
+
+
+
+##### Parameters
+
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| moduleName | `string`  | valid module name | &nbsp; |
+
+
+
+
+##### Examples
+
+```javascript
+
+import { rcFor } from '@lykmapipo/env';
+const config = rcFor('env');
+// => { locale: 'sw', ... }
+```
+
+
+##### Returns
+
+
+- `object`  runtime configurations
+
+
+
 
 *Documentation generated with [doxdox](https://github.com/neogeek/doxdox).*

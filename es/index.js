@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import { coerce } from 'semver';
 import { config } from 'dotenv';
 import expandEnv from 'dotenv-expand';
+import rc from 'rc';
 import { sync } from 'os-locale';
 import { sortedUniq, autoParse } from '@lykmapipo/common';
 import { once, toNumber, toString, set as set$1, get as get$1, forEach, isEmpty, map, trim, uniq, compact, toLower, merge, size, last } from 'lodash';
@@ -603,4 +604,33 @@ const getCountryCode = (defaultCountryCode = 'TZ') => {
   return countryCode;
 };
 
-export { apiVersion, clear, get, getArray, getBoolean, getCountryCode, getLocale, getNumber, getNumbers, getObject, getString, getStringSet, getStrings, is, isDevelopment, isHeroku, isLocal, isProduction, isTest, load, mapToNumber, mapToString, set };
+/**
+ * @function rcFor
+ * @name rcFor
+ * @description Load runtime configuration of a given module
+ * @param {string} moduleName valid module name
+ * @returns {object} runtime configurations
+ * @author lally elias <lallyelias87@gmail.com>
+ * @license MIT
+ * @since 0.14.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ *
+ * import { rcFor } from '@lykmapipo/env';
+ * const config = rcFor('env');
+ * // => { locale: 'sw', ... }
+ */
+const rcFor = moduleName => {
+  // return empty object if no module
+  if (isEmpty(moduleName)) {
+    return {};
+  }
+
+  // load runtime configuration
+  const conf = rc(moduleName);
+  return conf;
+};
+
+export { apiVersion, clear, get, getArray, getBoolean, getCountryCode, getLocale, getNumber, getNumbers, getObject, getString, getStringSet, getStrings, is, isDevelopment, isHeroku, isLocal, isProduction, isTest, load, mapToNumber, mapToString, rcFor, set };

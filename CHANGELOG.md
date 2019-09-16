@@ -1,3 +1,9 @@
+#### 0.14.0 (2019-09-16)
+
+##### New Features
+
+*  add rcFor helper ([b2810adc](https://github.com/lykmapipo/env/commit/b2810adc345e1064571408446343ae908d7c6fc2))
+
 #### 0.13.2 (2019-09-16)
 
 ##### Chores
