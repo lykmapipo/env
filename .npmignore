@@ -12,4 +12,5 @@ coverage
 test
 examples
 .travis.yml
+.envrc
 Gruntfile.js

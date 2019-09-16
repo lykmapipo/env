@@ -21,6 +21,7 @@ import {
   apiVersion,
   getLocale,
   getCountryCode,
+  rcFor,
 } from '../src/index';
 
 // set env
@@ -266,5 +267,14 @@ describe('env', () => {
     const countryCode = getCountryCode();
     expect(countryCode).to.exist.and.be.equal('TZ');
     process.env.DEFAULT_COUNTRY_CODE = envCountryCode;
+  });
+
+  it('should be able to read rc file', () => {
+    let rc = rcFor();
+    expect(rc).to.exist.and.be.empty;
+
+    rc = rcFor('env');
+    expect(rc).to.exist.and.not.be.empty;
+    expect(rc.port).to.exist.and.be.equal(5000);
   });
 });

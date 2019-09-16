@@ -26,12 +26,15 @@
   "keywords": [
     "lykmapipo",
     "env",
+    "rc",
     "dotenv",
     "config",
     "key",
     "value",
     "environment",
-    "execution"
+    "execution",
+    "runtime",
+    "configurations"
   ],
   "author": {
     "name": "lykmapipo",
@@ -90,6 +93,7 @@
     "dotenv-expand": ">=5.1.0",
     "lodash": ">=4.17.15",
     "os-locale": ">=4.0.0",
+    "rc": ">=1.2.8",
     "semver": ">=6.3.0"
   },
   "engines": {

@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import { coerce } from 'semver';
 import { config as loadEnv } from 'dotenv';
 import expandEnv from 'dotenv-expand';
+import rc from 'rc';
 import { sync as osLocale } from 'os-locale';
 import { autoParse, sortedUniq } from '@lykmapipo/common';
 import {
@@ -617,4 +618,33 @@ export const getCountryCode = (defaultCountryCode = 'TZ') => {
 
   // return derived country code
   return countryCode;
+};
+
+/**
+ * @function rcFor
+ * @name rcFor
+ * @description Load runtime configuration of a given module
+ * @param {string} moduleName valid module name
+ * @returns {object} runtime configurations
+ * @author lally elias <lallyelias87@gmail.com>
+ * @license MIT
+ * @since 0.14.0
+ * @version 0.1.0
+ * @static
+ * @public
+ * @example
+ *
+ * import { rcFor } from '@lykmapipo/env';
+ * const config = rcFor('env');
+ * // => { locale: 'sw', ... }
+ */
+export const rcFor = moduleName => {
+  // return empty object if no module
+  if (isEmpty(moduleName)) {
+    return {};
+  }
+
+  // load runtime configuration
+  const conf = rc(moduleName);
+  return conf;
 };
