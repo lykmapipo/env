@@ -1,6 +1,6 @@
 {
   "name": "@lykmapipo/env",
-  "version": "0.14.2",
+  "version": "0.14.3",
   "description": "Helper utilities for accessing environment variables",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -90,6 +90,7 @@
   "dependencies": {
     "@lykmapipo/common": ">=0.28.1",
     "audit": "0.0.6",
+    "changelog": "^1.4.2",
     "dotenv": ">=8.1.0",
     "dotenv-expand": ">=5.1.0",
     "fix": "0.0.6",
