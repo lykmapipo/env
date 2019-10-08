@@ -89,13 +89,9 @@
   },
   "dependencies": {
     "@lykmapipo/common": ">=0.28.2",
-    "audit": "0.0.6",
-    "changelog": "^1.4.2",
     "dotenv": ">=8.1.0",
     "dotenv-expand": ">=5.1.0",
-    "fix": "0.0.6",
     "lodash": ">=4.17.15",
-    "npm": "^6.11.3",
     "os-locale": ">=4.0.0",
     "rc": ">=1.2.8",
     "semver": ">=6.3.0"
