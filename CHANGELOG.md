@@ -1,3 +1,13 @@
+#### 0.14.5 (2019-10-08)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([9f8c25de](https://github.com/lykmapipo/env/commit/9f8c25dee488f63143652f5f4a3cd58933f92ab4))
+
+##### Bug Fixes
+
+* **deps:**  remove unused dependencies ([a8134f02](https://github.com/lykmapipo/env/commit/a8134f02697ba3a2ad052524c509599f318f70f8))
+
 #### 0.14.4 (2019-10-04)
 
 ##### Chores
