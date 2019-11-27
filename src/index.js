@@ -4,7 +4,7 @@ import { config as loadEnv } from 'dotenv';
 import expandEnv from 'dotenv-expand';
 import rc from 'rc';
 import { sync as osLocale } from 'os-locale';
-import { autoParse, sortedUniq } from '@lykmapipo/common';
+import { autoParse, parse, sortedUniq } from '@lykmapipo/common';
 import {
   compact,
   forEach,
@@ -354,7 +354,7 @@ export const getBoolean = (key, defaultValue) => {
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.10.0
- * @version 0.1.0
+ * @version 0.2.0
  * @static
  * @public
  * @example
@@ -369,7 +369,7 @@ export const getBoolean = (key, defaultValue) => {
  */
 export const getObject = (key, defaultValue = {}) => {
   let value = get(key, defaultValue);
-  value = value ? autoParse(value) : value;
+  value = value ? autoParse(parse(value)) : value;
   return value;
 };
 
