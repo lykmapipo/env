@@ -1,3 +1,13 @@
+#### 0.15.0 (2019-11-27)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([5bab4968](https://github.com/lykmapipo/env/commit/5bab4968ed686a0d931be49023c5e3a2eba7ea0b))
+
+##### Bug Fixes
+
+*  parse object env values ([788a34f0](https://github.com/lykmapipo/env/commit/788a34f078359fdc4a9513e4bf53784101272c1a))
+
 #### 0.14.12 (2019-11-26)
 
 ##### Chores
