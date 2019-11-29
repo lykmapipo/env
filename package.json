@@ -88,7 +88,7 @@
     "shelljs": "^0.8.3"
   },
   "dependencies": {
-    "@lykmapipo/common": ">=0.28.11",
+    "@lykmapipo/common": ">=0.28.13",
     "dotenv": ">=8.2.0",
     "dotenv-expand": ">=5.1.0",
     "lodash": ">=4.17.15",
