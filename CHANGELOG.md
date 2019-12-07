@@ -1,3 +1,13 @@
+#### 0.16.0 (2019-12-07)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([53e4a39b](https://github.com/lykmapipo/env/commit/53e4a39b446f0fb79de3d934e0742ea6f380d623))
+
+##### New Features
+
+*  support merge and unique on get numbers & strings ([493dbfb9](https://github.com/lykmapipo/env/commit/493dbfb94f200462faf345dbe0ac4c63e5ef8ddc))
+
 #### 0.15.2 (2019-12-06)
 
 ##### Chores

@@ -172,7 +172,7 @@ export const clear = (...keys) => {
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
- * @version 0.1.0
+ * @version 0.2.0
  * @static
  * @public
  * @example
@@ -215,7 +215,7 @@ export const getArray = (key, defaultValue, optns) => {
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
- * @version 0.1.0
+ * @version 0.2.0
  * @static
  * @public
  * @example
@@ -293,7 +293,7 @@ export const getString = function getString(key, defaultValue) {
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
- * @version 0.1.0
+ * @version 0.2.0
  * @static
  * @public
  * @example
@@ -321,7 +321,7 @@ export const getStrings = (key, defaultValue, optns) => {
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.11.0
- * @version 0.1.0
+ * @version 0.2.0
  * @static
  * @public
  * @example

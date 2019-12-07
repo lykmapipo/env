@@ -189,7 +189,7 @@ process.env.BASE_PATH;
 
 
 
-#### getArray(key[, defaultValue]) 
+#### getArray(key[, defaultValue, optns]) 
 
 Get array value from environment variable
 
@@ -202,6 +202,9 @@ Get array value from environment variable
 | ---- | ---- | ----------- | -------- |
 | key | `string`  | value key | &nbsp; |
 | defaultValue | `Array`  | value to return if key not exists | *Optional* |
+| optns | `object`  | valid options | *Optional* |
+| optns.merge&#x3D;true | `boolean`  | whether to merge default values | *Optional* |
+| optns.unique&#x3D;true | `boolean`  | whether to ensure unique values | *Optional* |
 
 
 
@@ -223,7 +226,7 @@ const categories = getArray('CATEGORIES');
 
 
 
-#### getNumbers(key[, defaultValue]) 
+#### getNumbers(key[, defaultValue, optns]) 
 
 Get array of numbers from environment variable
 
@@ -236,6 +239,9 @@ Get array of numbers from environment variable
 | ---- | ---- | ----------- | -------- |
 | key | `string`  | value key | &nbsp; |
 | defaultValue | `Array.<number>`  | value to return if key not exists | *Optional* |
+| optns | `object`  | valid options | *Optional* |
+| optns.merge&#x3D;true | `boolean`  | whether to merge default values | *Optional* |
+| optns.unique&#x3D;true | `boolean`  | whether to ensure unique values | *Optional* |
 
 
 
@@ -325,7 +331,7 @@ const category = getString('DEFAULT_CATEGORY');
 
 
 
-#### getStrings(key[, defaultValue]) 
+#### getStrings(key[, defaultValue, optns]) 
 
 Get array of strings from environment variable
 
@@ -338,6 +344,9 @@ Get array of strings from environment variable
 | ---- | ---- | ----------- | -------- |
 | key | `string`  | value key | &nbsp; |
 | defaultValue | `Array.<string>`  | value to return if key not exists | *Optional* |
+| optns | `object`  | valid options | *Optional* |
+| optns.merge&#x3D;true | `boolean`  | whether to merge default values | *Optional* |
+| optns.unique&#x3D;true | `boolean`  | whether to ensure unique values | *Optional* |
 
 
 
@@ -359,7 +368,7 @@ const categories = getStrings('CATEGORIES');
 
 
 
-#### getStringSet(key[, defaultValue]) 
+#### getStringSet(key[, defaultValue, optns]) 
 
 Get array of unique sorted strings from environment variable
 
@@ -372,6 +381,9 @@ Get array of unique sorted strings from environment variable
 | ---- | ---- | ----------- | -------- |
 | key | `string`  | value key | &nbsp; |
 | defaultValue | `Array.<string>`  | value to return if key not exists | *Optional* |
+| optns | `object`  | valid options | *Optional* |
+| optns.merge&#x3D;true | `boolean`  | whether to merge default values | *Optional* |
+| optns.unique&#x3D;true | `boolean`  | whether to ensure unique values | *Optional* |
 
 
 

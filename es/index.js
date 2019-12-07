@@ -4,8 +4,8 @@ import { config } from 'dotenv';
 import expandEnv from 'dotenv-expand';
 import rc from 'rc';
 import { sync } from 'os-locale';
-import { sortedUniq, autoParse, parse } from '@lykmapipo/common';
-import { once, toNumber, toString, set as set$1, get as get$1, forEach, isEmpty, map, trim, uniq, compact, toLower, merge, size, last } from 'lodash';
+import { mergeObjects, sortedUniq, autoParse, parse } from '@lykmapipo/common';
+import { once, toNumber, toString, set as set$1, get as get$1, forEach, isEmpty, compact, map, trim, uniq, toLower, merge, size, last } from 'lodash';
 
 /**
  * @function load
@@ -149,11 +149,14 @@ const clear = (...keys) => {
  * @description Get array value from environment variable
  * @param {string} key value key
  * @param {Array} [defaultValue] value to return if key not exists
+ * @param {object} [optns] valid options
+ * @param {boolean} [optns.merge=true] whether to merge default values
+ * @param {boolean} [optns.unique=true] whether to ensure unique values
  * @returns {Array} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
- * @version 0.1.0
+ * @version 0.2.0
  * @static
  * @public
  * @example
@@ -162,13 +165,24 @@ const clear = (...keys) => {
  * const categories = getArray('CATEGORIES');
  * // => ['Fashion', 'Technology']
  */
-const getArray = (key, defaultValue) => {
+const getArray = (key, defaultValue, optns) => {
+  // merge options
+  const options = mergeObjects({ merge: true, unique: true }, optns);
+
   let value = [].concat(defaultValue);
   if (!isEmpty(key)) {
-    value = [...value, ...get(key, '').split(',')];
+    const found = compact([...get(key, '').split(',')]);
+    if (options.merge) {
+      value = [...value, ...found];
+    } else {
+      value = isEmpty(found) ? value : found;
+    }
   }
   value = map(value, trim);
-  value = uniq(compact(value));
+  value = compact(value);
+  value = options.unique ? uniq(value) : value;
+
+  // return value
   return value;
 };
 
@@ -178,11 +192,14 @@ const getArray = (key, defaultValue) => {
  * @description Get array of numbers from environment variable
  * @param {string} key value key
  * @param {number[]} [defaultValue] value to return if key not exists
+ * @param {object} [optns] valid options
+ * @param {boolean} [optns.merge=true] whether to merge default values
+ * @param {boolean} [optns.unique=true] whether to ensure unique values
  * @returns {number[]} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
- * @version 0.1.0
+ * @version 0.2.0
  * @static
  * @public
  * @example
@@ -191,8 +208,8 @@ const getArray = (key, defaultValue) => {
  * const ages = getNumbers('AGES');
  * // => [11, 18]
  */
-const getNumbers = (key, defaultValue) => {
-  let numbers = getArray(key, defaultValue);
+const getNumbers = (key, defaultValue, optns) => {
+  let numbers = getArray(key, defaultValue, optns);
   numbers = map(numbers, mapToNumber);
   return numbers;
 };
@@ -253,11 +270,14 @@ const getString = function getString(key, defaultValue) {
  * @description Get array of strings from environment variable
  * @param {string} key value key
  * @param {string[]} [defaultValue] value to return if key not exists
+ * @param {object} [optns] valid options
+ * @param {boolean} [optns.merge=true] whether to merge default values
+ * @param {boolean} [optns.unique=true] whether to ensure unique values
  * @returns {string[]} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.1.0
- * @version 0.1.0
+ * @version 0.2.0
  * @static
  * @public
  * @example
@@ -266,8 +286,8 @@ const getString = function getString(key, defaultValue) {
  * const categories = getStrings('CATEGORIES');
  * // => ['Fashion', 'Technology']
  */
-const getStrings = (key, defaultValue) => {
-  let strings = getArray(key, defaultValue);
+const getStrings = (key, defaultValue, optns) => {
+  let strings = getArray(key, defaultValue, optns);
   strings = map(strings, mapToString);
   return strings;
 };
@@ -278,11 +298,14 @@ const getStrings = (key, defaultValue) => {
  * @description Get array of unique sorted strings from environment variable
  * @param {string} key value key
  * @param {string[]} [defaultValue] value to return if key not exists
+ * @param {object} [optns] valid options
+ * @param {boolean} [optns.merge=true] whether to merge default values
+ * @param {boolean} [optns.unique=true] whether to ensure unique values
  * @returns {string[]} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
  * @since 0.11.0
- * @version 0.1.0
+ * @version 0.2.0
  * @static
  * @public
  * @example
@@ -291,8 +314,8 @@ const getStrings = (key, defaultValue) => {
  * const categories = getStringSet('CATEGORIES');
  * // => ['Fashion', 'Technology']
  */
-const getStringSet = (key, defaultValue) => {
-  let strings = getStrings(key, defaultValue);
+const getStringSet = (key, defaultValue, optns) => {
+  let strings = getStrings(key, defaultValue, optns);
   strings = sortedUniq(strings);
   return strings;
 };
