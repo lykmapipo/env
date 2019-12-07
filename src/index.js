@@ -4,7 +4,7 @@ import { config as loadEnv } from 'dotenv';
 import expandEnv from 'dotenv-expand';
 import rc from 'rc';
 import { sync as osLocale } from 'os-locale';
-import { autoParse, parse, sortedUniq } from '@lykmapipo/common';
+import { autoParse, mergeObjects, parse, sortedUniq } from '@lykmapipo/common';
 import {
   compact,
   forEach,
@@ -165,6 +165,9 @@ export const clear = (...keys) => {
  * @description Get array value from environment variable
  * @param {string} key value key
  * @param {Array} [defaultValue] value to return if key not exists
+ * @param {object} [optns] valid options
+ * @param {boolean} [optns.merge=true] whether to merge default values
+ * @param {boolean} [optns.unique=true] whether to ensure unique values
  * @returns {Array} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
@@ -178,13 +181,24 @@ export const clear = (...keys) => {
  * const categories = getArray('CATEGORIES');
  * // => ['Fashion', 'Technology']
  */
-export const getArray = (key, defaultValue) => {
+export const getArray = (key, defaultValue, optns) => {
+  // merge options
+  const options = mergeObjects({ merge: true, unique: true }, optns);
+
   let value = [].concat(defaultValue);
   if (!isEmpty(key)) {
-    value = [...value, ...get(key, '').split(',')];
+    const found = compact([...get(key, '').split(',')]);
+    if (options.merge) {
+      value = [...value, ...found];
+    } else {
+      value = isEmpty(found) ? value : found;
+    }
   }
   value = map(value, trim);
-  value = uniq(compact(value));
+  value = compact(value);
+  value = options.unique ? uniq(value) : value;
+
+  // return value
   return value;
 };
 
@@ -194,6 +208,9 @@ export const getArray = (key, defaultValue) => {
  * @description Get array of numbers from environment variable
  * @param {string} key value key
  * @param {number[]} [defaultValue] value to return if key not exists
+ * @param {object} [optns] valid options
+ * @param {boolean} [optns.merge=true] whether to merge default values
+ * @param {boolean} [optns.unique=true] whether to ensure unique values
  * @returns {number[]} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
@@ -207,8 +224,8 @@ export const getArray = (key, defaultValue) => {
  * const ages = getNumbers('AGES');
  * // => [11, 18]
  */
-export const getNumbers = (key, defaultValue) => {
-  let numbers = getArray(key, defaultValue);
+export const getNumbers = (key, defaultValue, optns) => {
+  let numbers = getArray(key, defaultValue, optns);
   numbers = map(numbers, mapToNumber);
   return numbers;
 };
@@ -269,6 +286,9 @@ export const getString = function getString(key, defaultValue) {
  * @description Get array of strings from environment variable
  * @param {string} key value key
  * @param {string[]} [defaultValue] value to return if key not exists
+ * @param {object} [optns] valid options
+ * @param {boolean} [optns.merge=true] whether to merge default values
+ * @param {boolean} [optns.unique=true] whether to ensure unique values
  * @returns {string[]} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
@@ -282,8 +302,8 @@ export const getString = function getString(key, defaultValue) {
  * const categories = getStrings('CATEGORIES');
  * // => ['Fashion', 'Technology']
  */
-export const getStrings = (key, defaultValue) => {
-  let strings = getArray(key, defaultValue);
+export const getStrings = (key, defaultValue, optns) => {
+  let strings = getArray(key, defaultValue, optns);
   strings = map(strings, mapToString);
   return strings;
 };
@@ -294,6 +314,9 @@ export const getStrings = (key, defaultValue) => {
  * @description Get array of unique sorted strings from environment variable
  * @param {string} key value key
  * @param {string[]} [defaultValue] value to return if key not exists
+ * @param {object} [optns] valid options
+ * @param {boolean} [optns.merge=true] whether to merge default values
+ * @param {boolean} [optns.unique=true] whether to ensure unique values
  * @returns {string[]} environment value
  * @author lally elias <lallyelias87@gmail.com>
  * @license MIT
@@ -307,8 +330,8 @@ export const getStrings = (key, defaultValue) => {
  * const categories = getStringSet('CATEGORIES');
  * // => ['Fashion', 'Technology']
  */
-export const getStringSet = (key, defaultValue) => {
-  let strings = getStrings(key, defaultValue);
+export const getStringSet = (key, defaultValue, optns) => {
+  let strings = getStrings(key, defaultValue, optns);
   strings = sortedUniq(strings);
   return strings;
 };

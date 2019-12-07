@@ -126,6 +126,20 @@ describe('env', () => {
     expect(value).to.be.eql(['en', 'sw', 'fr']);
   });
 
+  it('should merge default with array value', () => {
+    const value = getArray('LOCALES', ['it']);
+    expect(value).to.exist;
+    expect(value).to.be.an('array');
+    expect(value).to.be.eql(['it', 'en', 'sw', 'fr']);
+  });
+
+  it('should ignore merge default with array value', () => {
+    const value = getArray('LOCALES', ['it'], { merge: false });
+    expect(value).to.exist;
+    expect(value).to.be.an('array');
+    expect(value).to.be.eql(['en', 'sw', 'fr']);
+  });
+
   it('should be able to get array default value if not exist', () => {
     const value = getArray('ANIMALS', ['elephant']);
     expect(value).to.exist;
@@ -140,6 +154,20 @@ describe('env', () => {
     expect(value).to.be.eql(['14', '15', '16']);
   });
 
+  it('should ignore merge default into array of strings', () => {
+    const value = getStrings('ALLOWED_AGES', ['17'], { merge: false });
+    expect(value).to.exist;
+    expect(value).to.be.an('array');
+    expect(value).to.be.eql(['14', '15', '16']);
+  });
+
+  it('should merge dafault into array of strings', () => {
+    const value = getStrings('ALLOWED_AGES', ['17']);
+    expect(value).to.exist;
+    expect(value).to.be.an('array');
+    expect(value).to.be.eql(['17', '14', '15', '16']);
+  });
+
   it('should be able to get array of numbers', () => {
     const value = getNumbers('ALLOWED_AGES');
     expect(value).to.exist;
@@ -147,11 +175,39 @@ describe('env', () => {
     expect(value).to.be.eql([14, 15, 16]);
   });
 
+  it('should ignore merge dafault into array of numbers', () => {
+    const value = getNumbers('ALLOWED_AGES', [17], { merge: false });
+    expect(value).to.exist;
+    expect(value).to.be.an('array');
+    expect(value).to.be.eql([14, 15, 16]);
+  });
+
+  it('should merge dafault into array of numbers', () => {
+    const value = getNumbers('ALLOWED_AGES', [17]);
+    expect(value).to.exist;
+    expect(value).to.be.an('array');
+    expect(value).to.be.eql([17, 14, 15, 16]);
+  });
+
   it('should be able to get array of unique strings', () => {
     const value = getStringSet('CATEGORIES');
     expect(value).to.exist;
     expect(value).to.be.an('array');
     expect(value).to.be.eql(['A', 'B', 'C']);
+  });
+
+  it('should ignore merge default into array of unique strings', () => {
+    const value = getStringSet('CATEGORIES', ['D'], { merge: false });
+    expect(value).to.exist;
+    expect(value).to.be.an('array');
+    expect(value).to.be.eql(['A', 'B', 'C']);
+  });
+
+  it('should merge default into array of unique strings', () => {
+    const value = getStringSet('CATEGORIES', ['D']);
+    expect(value).to.exist;
+    expect(value).to.be.an('array');
+    expect(value).to.be.eql(['A', 'B', 'C', 'D']);
   });
 
   it('should be able to get plain object', () => {
