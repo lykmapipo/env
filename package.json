@@ -1,6 +1,6 @@
 {
   "name": "@lykmapipo/env",
-  "version": "0.16.3",
+  "version": "0.16.4",
   "description": "Helper utilities for accessing environment variables",
   "main": "lib/index.js",
   "module": "es/index.js",
