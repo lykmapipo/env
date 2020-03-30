@@ -64,7 +64,7 @@ export const load = once(() => {
  * const age = mapToNumber('3.2');
  * // => 3.2
  */
-export const mapToNumber = value => toNumber(value);
+export const mapToNumber = (value) => toNumber(value);
 
 /**
  * @function mapToString
@@ -84,7 +84,7 @@ export const mapToNumber = value => toNumber(value);
  * const age = mapToString(3.2);
  * // => '3.2'
  */
-export const mapToString = value => toString(value);
+export const mapToString = (value) => toString(value);
 
 /**
  * @function set
@@ -154,7 +154,7 @@ export const get = (key, defaultValue) => {
  * // => undefined
  */
 export const clear = (...keys) => {
-  forEach([...keys], key => {
+  forEach([...keys], (key) => {
     delete process.env[key];
   });
 };
@@ -414,7 +414,7 @@ export const getObject = (key, defaultValue = {}) => {
  * const test = is('TEST');
  * // => true
  */
-export const is = env => toLower(get('NODE_ENV')) === toLower(env);
+export const is = (env) => toLower(get('NODE_ENV')) === toLower(env);
 
 /**
  * @function isTest
@@ -535,7 +535,7 @@ export const isHeroku = () => toLower(get('RUNTIME_ENV')) === 'heroku';
  * const version = apiVersion(); // => v1
  * const version = apiVersion({ version: '2.0.0' }); // => v2
  */
-export const apiVersion = optns => {
+export const apiVersion = (optns) => {
   // ensure options
   const options = merge(
     {},
@@ -661,7 +661,7 @@ export const getCountryCode = (defaultCountryCode = 'TZ') => {
  * const config = rcFor('env');
  * // => { locale: 'sw', ... }
  */
-export const rcFor = moduleName => {
+export const rcFor = (moduleName) => {
   // return empty object if no module
   if (isEmpty(moduleName)) {
     return {};
