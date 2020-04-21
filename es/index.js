@@ -3,7 +3,6 @@ import { coerce } from 'semver';
 import { config } from 'dotenv';
 import expandEnv from 'dotenv-expand';
 import rc from 'rc';
-import { sync } from 'os-locale';
 import { mergeObjects, sortedUniq, autoParse, parse } from '@lykmapipo/common';
 import { once, toNumber, toString, set as set$1, get as get$1, forEach, isEmpty, compact, map, trim, uniq, toLower, merge, size, last } from 'lodash';
 
@@ -48,7 +47,7 @@ const load = once(() => {
  * const age = mapToNumber('3.2');
  * // => 3.2
  */
-const mapToNumber = value => toNumber(value);
+const mapToNumber = (value) => toNumber(value);
 
 /**
  * @function mapToString
@@ -68,7 +67,7 @@ const mapToNumber = value => toNumber(value);
  * const age = mapToString(3.2);
  * // => '3.2'
  */
-const mapToString = value => toString(value);
+const mapToString = (value) => toString(value);
 
 /**
  * @function set
@@ -138,7 +137,7 @@ const get = (key, defaultValue) => {
  * // => undefined
  */
 const clear = (...keys) => {
-  forEach([...keys], key => {
+  forEach([...keys], (key) => {
     delete process.env[key];
   });
 };
@@ -398,7 +397,7 @@ const getObject = (key, defaultValue = {}) => {
  * const test = is('TEST');
  * // => true
  */
-const is = env => toLower(get('NODE_ENV')) === toLower(env);
+const is = (env) => toLower(get('NODE_ENV')) === toLower(env);
 
 /**
  * @function isTest
@@ -519,7 +518,7 @@ const isHeroku = () => toLower(get('RUNTIME_ENV')) === 'heroku';
  * const version = apiVersion(); // => v1
  * const version = apiVersion({ version: '2.0.0' }); // => v2
  */
-const apiVersion = optns => {
+const apiVersion = (optns) => {
   // ensure options
   const options = merge(
     {},
@@ -578,11 +577,8 @@ const apiVersion = optns => {
  * // => sw
  */
 const getLocale = (defaultLocale = 'sw') => {
-  // obtain os locale
-  let locale = sync() || sync({ spawn: false }) || defaultLocale;
-
   // switch with environment locale
-  locale = getString('DEFAULT_LOCALE', locale);
+  const locale = getString('DEFAULT_LOCALE', defaultLocale);
 
   // return derived locale
   return locale;
@@ -645,7 +641,7 @@ const getCountryCode = (defaultCountryCode = 'TZ') => {
  * const config = rcFor('env');
  * // => { locale: 'sw', ... }
  */
-const rcFor = moduleName => {
+const rcFor = (moduleName) => {
   // return empty object if no module
   if (isEmpty(moduleName)) {
     return {};
