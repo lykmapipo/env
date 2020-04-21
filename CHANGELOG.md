@@ -1,3 +1,17 @@
+#### 0.17.0 (2020-04-21)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([0ce426bc](https://github.com/lykmapipo/env/commit/0ce426bce23513127ea0d5d6c07ab82cafc66e2f))
+
+##### Refactors
+
+*  remore os locale checks ([168856d9](https://github.com/lykmapipo/env/commit/168856d97c57571d64e958819274363014cc934e))
+
+##### Tests
+
+*  use test helpers ([523e28b8](https://github.com/lykmapipo/env/commit/523e28b8772c426b73e68371d6056b226df32ed1))
+
 #### 0.16.12 (2020-04-15)
 
 ##### Chores
