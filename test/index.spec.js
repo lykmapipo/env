@@ -1,5 +1,5 @@
 import path from 'path';
-import { expect } from 'chai';
+import { expect } from '@lykmapipo/test-helpers';
 import {
   get,
   set,

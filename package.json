@@ -1,6 +1,6 @@
 {
   "name": "@lykmapipo/env",
-  "version": "0.16.12",
+  "version": "0.17.0",
   "description": "Helper utilities for accessing environment variables",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -63,6 +63,7 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@commitlint/travis-cli": "^8.3.5",
+    "@lykmapipo/test-helpers": "^0.5.14",
     "chai": "^4.2.0",
     "commitizen": "^4.0.4",
     "coveralls": "^3.0.11",
