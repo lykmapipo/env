@@ -3,7 +3,6 @@ import { coerce } from 'semver';
 import { config as loadEnv } from 'dotenv';
 import expandEnv from 'dotenv-expand';
 import rc from 'rc';
-import { sync as osLocale } from 'os-locale';
 import { autoParse, mergeObjects, parse, sortedUniq } from '@lykmapipo/common';
 import {
   compact,
@@ -594,11 +593,8 @@ export const apiVersion = (optns) => {
  * // => sw
  */
 export const getLocale = (defaultLocale = 'sw') => {
-  // obtain os locale
-  let locale = osLocale() || osLocale({ spawn: false }) || defaultLocale;
-
   // switch with environment locale
-  locale = getString('DEFAULT_LOCALE', locale);
+  const locale = getString('DEFAULT_LOCALE', defaultLocale);
 
   // return derived locale
   return locale;

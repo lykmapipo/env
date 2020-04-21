@@ -325,6 +325,22 @@ describe('env', () => {
     process.env.DEFAULT_COUNTRY_CODE = envCountryCode;
   });
 
+  it('should be able to compute country code from locale', () => {
+    const envLocale = process.env.DEFAULT_LOCALE;
+    process.env.DEFAULT_LOCALE = 'sw_TZ';
+    const countryCode = getCountryCode();
+    expect(countryCode).to.exist.and.be.equal('TZ');
+    process.env.DEFAULT_LOCALE = envLocale;
+  });
+
+  it('should be able to compute country code from locale', () => {
+    const envLocale = process.env.DEFAULT_LOCALE;
+    process.env.DEFAULT_LOCALE = 'sw-TZ';
+    const countryCode = getCountryCode();
+    expect(countryCode).to.exist.and.be.equal('TZ');
+    process.env.DEFAULT_LOCALE = envLocale;
+  });
+
   it('should be able to read rc file', () => {
     let rc = rcFor();
     expect(rc).to.exist.and.be.empty;
