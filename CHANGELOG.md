@@ -1,3 +1,9 @@
+#### 0.17.33 (2021-06-01)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([fa54703e](https://github.com/lykmapipo/env/commit/fa54703e293b07b173d776d934c8e0a03a396189))
+
 #### 0.17.32 (2021-06-01)
 
 #### 0.17.32 (2021-06-01)
