@@ -1,8 +1,14 @@
 # env
 
 [![Build Status](https://travis-ci.org/lykmapipo/env.svg?branch=master)](https://travis-ci.org/lykmapipo/env)
-[![Dependencies Status](https://david-dm.org/lykmapipo/env.svg?style=flat-square)](https://david-dm.org/lykmapipo/env)
+[![Dependencies Status](https://david-dm.org/lykmapipo/env.svg)](https://david-dm.org/lykmapipo/env)
 [![Coverage Status](https://coveralls.io/repos/github/lykmapipo/env/badge.svg?branch=master)](https://coveralls.io/github/lykmapipo/env?branch=master)
+[![GitHub License](https://img.shields.io/github/license/lykmapipo/env)](https://github.com/lykmapipo/env/blob/develop/LICENSE)
+
+[![Commitizen Friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Code Style](https://badgen.net/badge/code%20style/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)
+[![npm version](https://img.shields.io/npm/v/@lykmapipo/env)](https://www.npmjs.com/package/@lykmapipo/env)
 
 Helper utilities for accessing environment variables
 
