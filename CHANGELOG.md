@@ -1,3 +1,13 @@
+#### 0.17.35 (2021-08-05)
+
+##### Chores
+
+* **deps:**  force latest versions ([11d01751](https://github.com/lykmapipo/env/commit/11d017511516d77de2be4974e1d45bb0dddabadc))
+
+##### Documentation Changes
+
+* **readme:**  improve status badges ([f113be15](https://github.com/lykmapipo/env/commit/f113be1524a54802be820c074f538231e6d4bd89))
+
 #### 0.17.34 (2021-06-10)
 
 ##### Chores
