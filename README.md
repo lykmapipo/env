@@ -1,6 +1,6 @@
 # env
 
-[![Build Status](https://travis-ci.com/lykmapipo/env.svg?branch=master)](https://travis-ci.com/lykmapipo/env)
+[![Build Status](https://app.travis-ci.com/lykmapipo/env.svg?branch=master)](https://app.travis-ci.com/lykmapipo/env)
 [![Dependencies Status](https://david-dm.org/lykmapipo/env.svg)](https://david-dm.org/lykmapipo/env)
 [![Coverage Status](https://coveralls.io/repos/github/lykmapipo/env/badge.svg?branch=master)](https://coveralls.io/github/lykmapipo/env?branch=master)
 [![GitHub License](https://img.shields.io/github/license/lykmapipo/env)](https://github.com/lykmapipo/env/blob/develop/LICENSE)
