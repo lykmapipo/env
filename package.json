@@ -99,7 +99,7 @@
   "dependencies": {
     "@lykmapipo/common": ">=0.44.5",
     "dotenv": ">=10.0.0",
-    "dotenv-expand": ">=5.1.0",
+    "dotenv-expand": "~5.1.0",
     "lodash": ">=4.17.21",
     "rc": ">=1.2.8",
     "semver": ">=7.3.5"
