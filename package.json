@@ -58,11 +58,11 @@
   },
   "homepage": "https://github.com/lykmapipo/env",
   "devDependencies": {
-    "@babel/cli": "^7.16.8",
-    "@babel/core": "^7.16.12",
+    "@babel/cli": "^7.17.0",
+    "@babel/core": "^7.17.2",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
-    "@babel/register": "^7.16.9",
+    "@babel/register": "^7.17.0",
     "@commitlint/cli": "^13.2.1",
     "@commitlint/config-conventional": "^13.2.0",
     "@commitlint/travis-cli": "^13.2.1",
@@ -91,7 +91,7 @@
     "nyc": "^15.1.0",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.66.1",
+    "rollup": "^2.67.2",
     "shelljs": "^0.8.5",
     "striptags": "^3.2.0",
     "websocket-extensions": "^0.1.4"
